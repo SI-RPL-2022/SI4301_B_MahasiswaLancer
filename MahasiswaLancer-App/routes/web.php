@@ -22,4 +22,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 /*Mahasiswa*/
-Route::get('/biodata', [App\Http\Controllers\BiodataMHSController::class, 'index'])->name('biodata'); 
+Route::get('/biodata', [App\Http\Controllers\BiodataMHSController::class, 'index'])->name('biodata');
+Route::get('/statuspekerjaanMHS', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'index'])->name('statusPekerjaan');  
