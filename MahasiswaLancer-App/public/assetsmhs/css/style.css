@@ -11324,7 +11324,6 @@ code {
 /* Footer */
 .footer {
   margin-left: 300px;
-  background: #f0f0f0;
   color: color(dark);
 
   padding: 30px 1rem;
@@ -14386,7 +14385,6 @@ dl {
 
 .content-wrapper {
   margin-left: 260px;
-  background:#f0f0f0;
   padding: 2.75rem 2.25rem;
   width: 100%;
   -webkit-box-flex: 1;

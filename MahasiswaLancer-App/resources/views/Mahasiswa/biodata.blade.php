@@ -27,7 +27,7 @@
                         style="width:30px; height: auto; margin-right: 10px;" alt="logo" />MahasiswaLancer</a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch"
-                style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                style="box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.1);">
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile">
                         <a class="nav-link" id="profile" href="#" aria-expanded="false">
@@ -85,13 +85,13 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
+                        <div class="col-12 grid-margin">
                             <div class="card"
-                                style="border-radius: 37px; box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.1); width: 947px;">
+                                style="border-radius: 37px; box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.1); width: 947px; margin-top: 124px; margin-left:112px;">
                                 <div class="card-body">
                                     <img src="assetsmhs/images/faces/face27.jpg" alt="..."
-                                        style="border-radius: 50%; margin-left: 40%; width:180px; height: auto;">
-                                    <a style="position: absolute; left: 525px; top: 230px;">Edit Photo</a>
+                                        style="border-radius: 50%; margin-left: 38%; width:180px; height: auto; margin-top:-135px;">
+                                    <a class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="position: absolute; left: 408px; top: 100px;">Edit Photo</a>
                                     
                                     @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                                         @livewire('profile.update-profile-information-form')
@@ -101,11 +101,11 @@
                                     <div class="d-flex">
 
                                         <form>
-                                            <div style="margin-left: 120px; margin-top: 65px; padding-bottom: 150px;">
+                                            <div style="margin-left: 75px; margin-top: 90px;">
                                                 <div class="mb-4">
                                                     <label for="exampleInputNama1" class="form-label"><b>Nama
                                                             Lengkap</b></label>
-                                                    <input style="width:840px; height:43px;" type="text"
+                                                    <input style="width:740px; height:43px; border-radius: 6px;" type="text"
                                                         class="form-control" id="exampleInputNama1"
                                                         placeholder="Nama Lengkap">
                                                 </div>
