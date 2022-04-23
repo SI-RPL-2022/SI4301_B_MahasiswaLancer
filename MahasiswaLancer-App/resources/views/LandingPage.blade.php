@@ -26,12 +26,14 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/asset-util.css">
     <link rel="stylesheet" type="text/css" href="css/asset-main.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-    </script>
+    </script> --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <!--===============================================================================================-->
 </head>
 
@@ -59,17 +61,48 @@
                     data-holder-rendered="true" style="margin-top: 27px; width: 40px;height: 40px; margin-left: 350px;">
                 <div class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" style="margin-top: 35px; margin-left: 15px;">
-                      {{ Auth::user()->name }}
+                        {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu" style="border-radius: 10px; border-color: #DAE3DC;">
                         <a class="dropdown-item text-center" href="{{ route('profile.show') }}">Profile</a>
                         <a class="dropdown-item text-center" href="#">Status Pengerjaan</a>
-                        <a class="dropdown-item text-danger text-center" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">Logout</a>
-                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
-                          @csrf
-                      </form>
+                        <button type="button" class="btn dropdown-item text-danger text-center" data-toggle="dropdown modal"
+                            data-target="#logout"><i class=""></i>&nbsp Logout</button>
+
+
+                        {{-- <a class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                            style="margin-left: 25px; background: rgba(35, 170, 68, 0.16); border-radius: 3px; width: 100px;">
+                            <span style="margin-left: -0.8px; color: red;">
+                                <i class=""></i>&nbsp Logout
+                            </span>
+                        </a> --}}
+                        <!-- Modal Terima Pesanan -->
+                        <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel"
+                                            style="color: red; margin-left:45%;">Logout</h5>
+                                        <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="text-align: center;">
+                                        Apakah anda yakin ingin keluar ? <br /><br /><br />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn"
+                                            style="margin-left:-500px; display: flex; flex-direction: row; justify-content: center; align-items: center; border: 1px solid #000000; box-sizing: border-box; border-radius: 10px; width: 219px; height: 60px;"
+                                            data-bs-dismiss="modal">Batalkan</button>
+                                        <a class="btn" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();"
+                                            style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 219px; background: #121814; border-radius: 10px; color: whitesmoke; height: 60px; ">Logout</a>
+                                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{-- <x-jet-dropdown id="settingsDropdown">
@@ -115,19 +148,19 @@
                   </x-slot>
               </x-jet-dropdown> --}}
             @else
-            <ul class="nav" style="margin-left: 330px; margin-top: 30px;">
+                <ul class="nav" style="margin-left: 330px; margin-top: 30px;">
 
-              <li class="nav-item" style="padding-right: 30px;">
-                  <a class="nav-link text-black" href="{{ route('login') }}"><b>Masuk</b></a>
-              </li>
-              <li class="nav-item" style="padding-right: 40px; padding-top: 5px;">
-                  <a href="{{ route('register') }}" class="btn-sm text-light px-3"
-                      style="background-color: #151E17; border-radius: 86px; width: 100px;"><b>Daftar</b></a>
-              </li>
-          </ul>
+                    <li class="nav-item" style="padding-right: 30px;">
+                        <a class="nav-link text-black" href="{{ route('login') }}"><b>Masuk</b></a>
+                    </li>
+                    <li class="nav-item" style="padding-right: 40px; padding-top: 5px;">
+                        <a href="{{ route('register') }}" class="btn-sm text-light px-3"
+                            style="background-color: #151E17; border-radius: 86px; width: 100px;"><b>Daftar</b></a>
+                    </li>
+                </ul>
             @endauth
 
-            
+
 
             <div class="container m-l-150">
                 <div class="row">
@@ -532,6 +565,21 @@
             </p>
         </div>
     </div>
+
+    <!-- plugins:js -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> --}}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
 
 </body>
 
