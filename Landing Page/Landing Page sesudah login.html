@@ -32,29 +32,50 @@
           <a class="nav-link text-black" href="#jasa">Jasa</a>
         </li>
          <!-- login & regist -->
-        <li class="nav-item" style="padding-left: 300px;">
-          <a class="nav-link text-black" href="#">Masuk</a>
-        </li>
-        <li class="nav-item" style="padding-right: 40px; padding-top: 5px;">
-          <button href="" class="btn-sm text-light" style="background-color: #151E17; border-radius: 86px; width: 85px;"><b>Daftar</b></button>
-        </li>
+         <img class="rounded-circle" alt="40x40" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+         data-holder-rendered="true"  style=" width: 40px;height: 40px; margin-left: 300px;">
+         <div class="dropdown">
+             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" style="margin-left: 15px;">
+               Alfian Rifki Irawan
+             </button>
+             <div class="dropdown-menu" style="border-radius: 10px; border-color: #DAE3DC;">
+               <li><a class="dropdown-item text-center" href="#">Profile</a></li>
+               <li><a class="dropdown-item text-center" href="#">Status Pengerjaan</a></li>
+               <li><a class="dropdown-item text-danger text-center" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Logout</a></li>
+             </div>
+         </div>
+
+         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboa rd="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel" style="color: red; margin-left:45%;">Logout</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+              Apakah anda yakin ingin keluar ? <br /><br /><br />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn"
+                style="margin-left:-500px; display: flex; flex-direction: row; justify-content: center; align-items: center; border: 1px solid #000000; box-sizing: border-box; border-radius: 10px; width: 219px; height: 60px;"
+                data-bs-dismiss="modal">Batalkan</button>
+              <button type="button" class="btn"
+                style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 219px; background: #121814; border-radius: 10px; color: whitesmoke; height: 60px; ">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        
       </ul>
     
       <div class="container">
         <div class="row">
             <!-- text -->
-            <div class="col-5" style="padding-top: 180px; padding-left: 200px;">
+            <div class="col-5" style="padding-top: 200px; padding-left: 200px;">
                 <h3><b>Temukan MahasiswaLancer untuk Bantu Projectmu</b></h3>
                 <br>
                 <a style="color: #626E65;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra varius donec sed nec. </a>
-                <div class="row" style="padding-top: 40px;">
-                  <div class="col-4" >
-                    <button type="button" href="" class="btn-sm text-light" style="background-color: #151E17; border-radius: 86px; width: 120px;"><b>Create a Job</b></button>
-                  </div>
-                  <div class="col-6">
-                    <button type="button" href="" class="btn-sm text-dark" style="background-color:transparent; border-radius: 86px; width: 200px;"><b>As MahasiswaLancer</b></button>
-                  </div> 
-                </div>
             </div>
             
             <!-- image -->
@@ -358,17 +379,11 @@
       </div>
     </section>
 
-    <div class="row" style="background: #F3F9F3; padding-bottom: 80px;">
+    <div class="row" style="background: #F3F9F3; padding-bottom: 80px">
       <div class="container" style="padding-top: 80px;">
           <h1 class="text-center"><b>Apa Kata Mereka</b></h1>
           <h1 class="text-center"><b>Setelah Bersama Kami</b></h1>
-          <img src="images/comment.png" style="padding-left: 17%; padding-top: 60px;">
-      </div>
-      <div class="container" style="padding-top: 80px;">
-        <h1 class="text-center"><b>Tertarik Bergabung</b></h1>
-        <h1 class="text-center"><b>Bersama Kami ?</b></h1>
-        <button type="button" href="" class="btn-sm text-light " style="background-color: #151E17; border-radius: 86px; width: 150px; margin-left: 45%; margin-top: 2%;"><b>Daftar Sekarang</b></button>
-
+          <img src="images/comment.png" style="padding-left: 17%; padding-top: 80px;">
       </div>
     </div>
 
