@@ -38,7 +38,6 @@ class CreateNewUser implements CreatesNewUsers
         } else {
             $user->attachRole('client');
         };
-        
 
         return $user;
     }
