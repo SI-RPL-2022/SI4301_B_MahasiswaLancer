@@ -93,19 +93,14 @@
                             name="password_confirmation" required autocomplete="new-password"
                             style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" /> --}}
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                value="option1" style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" >
-                            <label class="form-check-label" for="inlineRadio1">1</label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="mahasiswa"
+                                value="mahasiswa" style="margin-left: 40px;" >
+                            <label class="form-check-label" for="mahasiswa" style="margin-left: 40px;">Mahasiswa</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                value="option2" style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" >
-                            <label class="form-check-label" for="inlineRadio2">2</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                value="option3" disabled style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" >
-                            <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="client"
+                                value="client" style="margin-left: 40px;" >
+                            <label class="form-check-label" for="client" style="margin-left: 40px;">Client</label>
                         </div>
                     </div>
 
