@@ -121,7 +121,7 @@
         </section>
 
         <section id="fitur">
-            <div class="row" style="background: #F3F9F3; height: 630px;">
+            <div class="row" style="background: #F3F9F3; padding-bottom :80px;">
                 <div class="container" style="padding-top: 80px;">
                     <h1 class="text-center"><b>Bersama Kami</b></h1>
                     <h1 class="text-center p-t-20"><b>Mudah dan Murah</b></h1>
