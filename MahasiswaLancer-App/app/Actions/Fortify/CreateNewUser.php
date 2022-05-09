@@ -33,7 +33,12 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
 
-        $user->attachRole('Mahasiswa');
+        if ($input['daftar_sebagai']=='mahasiswa'){
+            $user->attachRole('mahasiswa');
+        } else {
+            $user->attachRole('client');
+        };
+        
 
         return $user;
     }

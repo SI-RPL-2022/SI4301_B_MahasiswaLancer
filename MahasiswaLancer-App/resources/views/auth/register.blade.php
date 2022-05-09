@@ -93,12 +93,12 @@
                             name="password_confirmation" required autocomplete="new-password"
                             style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" /> --}}
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="mahasiswa"
+                            <input class="form-check-input" type="radio" name="daftar_sebagai" id="mahasiswa"
                                 value="mahasiswa" style="margin-left: 40px;" >
                             <label class="form-check-label" for="mahasiswa" style="margin-left: 40px;">Mahasiswa</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="client"
+                            <input class="form-check-input" type="radio" name="daftar_sebagai" id="client"
                                 value="client" style="margin-left: 40px;" >
                             <label class="form-check-label" for="client" style="margin-left: 40px;">Client</label>
                         </div>
