@@ -39,7 +39,7 @@
                 <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
                     @csrf
                     <span class="login100-form-title p-b-10">
-                        Daftar as Client
+                        Daftar
                     </span>
 
                     <div class="mb-3 mt-3">
@@ -55,9 +55,8 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label p-l-40 p-b-10"><b>Email</b></label>
-                        <x-jet-input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                            type="email" name="email" :value="old('email')" id="email" placeholder="Masukkan Email"
-                            required
+                        <x-jet-input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
+                            name="email" :value="old('email')" id="email" placeholder="Masukkan Email" required
                             style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" />
                         <x-jet-input-error for="email" class="invalid-feedback p-l-40"></x-jet-input-error>
                         {{-- <input type="email" class="form-control" id="email" placeholder="Masukkan Email" name="email"
@@ -88,14 +87,36 @@
                             style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;"> --}}
                     </div>
 
+                    <div class="mb-3">
+                        <label for="role" class="form-label p-l-40 p-b-10"><b>Daftar Sebagai</b></label>
+                        {{-- <x-jet-input class="form-control" id="role" placeholder="Konfirmasi Password" type="password"
+                            name="password_confirmation" required autocomplete="new-password"
+                            style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" /> --}}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                value="option1" style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" >
+                            <label class="form-check-label" for="inlineRadio1">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                value="option2" style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" >
+                            <label class="form-check-label" for="inlineRadio2">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                value="option3" disabled style="border-radius: 15px; border-color: #E9EBFF;height:50px;width: 370px; margin-left: 40px;" >
+                            <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+                        </div>
+                    </div>
+
 
                     <div class="container-login100-form-btn p-t-13">
                         {{-- <button class="login100-form-btn">
                             Daftar
                         </button> --}}
-						<x-jet-button class="login100-form-btn">
-                                Daftar
-						</x-jet-button>
+                        <x-jet-button class="login100-form-btn">
+                            Daftar
+                        </x-jet-button>
                     </div>
 
                     <div class="text-center p-t-20">
@@ -107,9 +128,10 @@
 
                 <div class="login100-more">
                     <div class="container">
-                        <p class="p-t-80 text-center"><a href="/"><img src="asset-images/LOGO MAHASISWALANCER.png"></a></p>
+                        <p class="p-t-80 text-center"><a href="/"><img src="asset-images/LOGO MAHASISWALANCER.png"></a>
+                        </p>
                         <p class="p-t-90 text-center"><img src="asset-images/ilustrasi.png" style="width: 400px;"></p>
-                        <div class="text-center p-t-30 p-b-10"><b>Selesaikan tugas mu melalui MahasiswaLancer 👋</b>
+                        <div class="text-center p-t-30 p-b-10"><b>Selesaikan tugasmu melalui MahasiswaLancer 👋</b>
                         </div>
                         <p class="text-center" style="">Bantu kamu mengatur jadwal kegiatanmu sehari-hari dengan
                             mudah.

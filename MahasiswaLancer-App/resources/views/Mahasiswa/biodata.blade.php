@@ -14,9 +14,199 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assetsmhs/images/dashboard/bxs_graduation1.png" />
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+        <header class="topbar" data-navbarbg="skin5">
+          <nav class="navbar top-navbar navbar-expand-md" style="color: #233e99">
+            <div class="navbar-header" data-logobg="skin6">
+        
+              <a class="navbar-brand" href="/">
+                
+                <b class="logo-icon">
+                  
+                  <img src="{{ url('dashboard_assets/img/Logo.png') }}" alt="homepage" style="width: 200px" />
+                </b>
+                
+              </a>
+        
+              <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none" href="javascript:void(0)"><i class="ti-close ti-menu text-white" aria-hidden="true"></i></a>
+            </div>
+      
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" style="padding-right: 2%">
+        
+              <div class="navbar-nav ms-auto d-flex align-items-center">
+                {{-- @role('admin')
+                  <h4 class="dropdown-header small text-muted">
+                    Admin
+                  </h4>
+                @endrole --}}
+                  @auth
+                      <x-jet-dropdown id="settingsDropdown">
+                          <x-slot name="trigger">
+                              @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                              <div class="d-inline p-2 text-muted">{{ Auth::user()->name }}</div>
+                              <div class="d-inline p-2 "><img class="rounded-circle" width="32" height="32" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" /></div>
+                              @else
+                                
+                                {{ Auth::user()->name }}
+  
+                                <svg class="ms-2" width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                              @endif
+                          </x-slot>
+  
+                          <x-slot name="content">
+  
+                              <h6 class="dropdown-header small text-muted">
+                                  {{ __('Manage Account') }}
+                              </h6>
+  
+                              <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                  {{ __('Profile') }}
+                              </x-jet-dropdown-link>
+  
+                              @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                                  <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
+                                      {{ __('API Tokens') }}
+                                  </x-jet-dropdown-link>
+                              @endif
+  
+                              {{-- @role('user')
+                              <x-jet-dropdown-link href="/kegiatan">
+                                  {{ __('Activity') }}
+                              </x-jet-dropdown-link>
+                              @endrole --}}
+  
+                              <hr class="dropdown-divider">
+  
+                              <div>
+                              <x-jet-dropdown-link href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                           document.getElementById('logout-form').submit();">
+                                  {{ __('Log out') }}
+                              </x-jet-dropdown-link>
+                              </div>
+                              <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                  @csrf
+                              </form>
+                          </x-slot>
+                      </x-jet-dropdown>
+                  @endauth
+                  </div>
+            </div>
+          </nav>
+        </header>
+  
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+          
+          <div class="scroll-sidebar">
+            
+            {{-- <nav class="sidebar-nav">
+              <ul id="sidebarnav">
+                
+                <li class="sidebar-item pt-2">
+                  
+                  @role('user')
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false" href="/dashboard">
+                  @endrole
+  
+                  @role('admin')
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false" href="/admin-dashboard">
+                  @endrole
+  
+                    <i class="far fa-clock text-white" aria-hidden="true"></i>
+                    <span class="hide-menu text-white">Dashboard</span>
+                  </a>
+                </li>
+  
+                <li class="sidebar-item">
+                  @role('user')
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle text-white" aria-expanded="false" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
+                    <i class="fa fa-user-md text-white" aria-hidden="true"></i>
+                    <span class="hide-menu text-white">Konsultasi</span>
+                  </a>
+                  <ul class="dropdown-menu mx-5" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item-text text-white" href="/kegiatan-aktif" style="padding-left: 30px">Konsultasi</a></li>
+                    <li><a class="dropdown-item-text text-white" href="/pilih-psikolog" style="padding-left: 30px">Tambah Konsultasi</a></li>
+                  </ul>
+                  @endrole
+  
+                  @role('admin')
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle text-white" aria-expanded="false" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
+                    <i class="fa fa-users text-white" aria-hidden="true"></i>
+                    Psikolog Zyon
+                  </a>
+                  <ul class="dropdown-menu mx-5" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item-text text-white" href="/psikolog-list" style="padding-left: 30px">Psikolog</a></li>
+                    <li><a class="dropdown-item-text text-white" href="/tambah-psikolog" style="padding-left: 30px">Tambah Psikolog</a></li>
+                  </ul>
+                  @endrole
+                </li>
+  
+                <li class="sidebar-item">
+                  @role('user')
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false" href="/riwayat-transaksi">
+                    <i class="fa fa-credit-card text-white" aria-hidden="true"></i>
+                    <span class="hide-menu text-white">Transaksi</span>
+                  </a>
+                  @endrole
+  
+                  @role('admin')
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false" href="/konsultasi">
+                    <i class="fa fa-tasks text-white" aria-hidden="true"></i>
+                    <span class="hide-menu text-white">Konsultasi</span>
+                  </a>
+                  @endrole
+                </li>
+  
+                @role('admin')
+                <li class="sidebar-item">
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false" href="/transaksi">
+                    <i class="fa fa-credit-card text-white" aria-hidden="true"></i>
+                    <span class="hide-menu text-white">Transaksi</span>
+                  </a>
+                  
+                </li>
+                @endrole
+  
+                @role('admin')
+                <li class="sidebar-item">
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false" href="/metode-pembayaran">
+                    <i class="fa fa-credit-card text-white" aria-hidden="true"></i>
+                    <span class="hide-menu text-white">Metode Pembayaran</span>
+                  </a>
+                </li>
+                @endrole
+              </ul>
+            </nav> --}}
+            
+          </div>
+          
+        </aside>
+  
+        <div class="page-wrapper">
+          <x-jet-validation-errors class="mb-3 rounded-3" />
+  
+          {{-- @yield('container') --}}
+  
+          <footer class="footer text-center">2021 © Zyon</footer>
+    
+        </div>
+  
+      </div>
+
     <div class="container-scroller">
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
@@ -85,7 +275,20 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
-                        <div class="col-12 grid-margin">
+                        <x-app-layout>
+                            @livewire('profile.update-profile-information-form')
+                        {{-- @if (Laravel\Fortify\Features::canUpdateProfileInformation()) --}}
+                        <x-slot name="header">
+                            <h2 class="h4 font-weight-bold">
+                                {{ __('Profile') }}
+                            </h2>
+                        </x-slot>
+                            {{-- @livewire('profile.update-profile-information-form') --}}
+
+                            {{-- <x-jet-section-border /> --}}
+                        {{-- @endif --}}
+                        </x-app-layout>
+                        {{-- <div class="col-12 grid-margin">
                             <div class="card"
                                 style="border-radius: 37px; box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.1); width: 947px; margin-top: 124px; margin-left:112px;">
                                 <div class="card-body">
@@ -93,11 +296,7 @@
                                         style="border-radius: 50%; margin-left: 38%; width:180px; height: auto; margin-top:-135px;">
                                     <a class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="position: absolute; left: 408px; top: 100px;">Edit Photo</a>
                                     
-                                    @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                                        @livewire('profile.update-profile-information-form')
-
-                                        <x-jet-section-border />
-                                    @endif
+                                    
                                     <div class="d-flex">
 
                                         <form>
@@ -135,7 +334,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <footer class="footer" style="width: 110%; margin-left: 20%;">
