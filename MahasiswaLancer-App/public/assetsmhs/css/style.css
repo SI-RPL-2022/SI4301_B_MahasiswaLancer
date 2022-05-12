@@ -14048,7 +14048,7 @@ dl {
 
 /* Sidebar */
 .sidebar {
-  margin-left: -12px;
+  margin-left: 0px;
   position:fixed;
   min-height: calc(100vh - 70px);
   background: #000;
@@ -14224,7 +14224,7 @@ dl {
     right: -260px;
     -webkit-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out; }
-    .sidebar-offcanvas.active {
+    .sidebar-offcanvas .active {
       right: 0; } }
 
 /* Layouts */
