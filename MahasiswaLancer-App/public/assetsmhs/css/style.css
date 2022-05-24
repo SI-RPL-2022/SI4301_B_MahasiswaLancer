@@ -14045,7 +14045,7 @@ dl {
 
 /* Sidebar */
 .sidebar {
-  margin-left: 0px;
+  
   position:fixed;
   min-height: calc(100vh - 70px);
   background: #000;
