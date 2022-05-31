@@ -52,6 +52,10 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     
 });
 
+Route::get('tes', function(){
+    return view('editJasa');
+})->name('tes');
+
 Route::post('dump', function (Request $request) {
     dd($request);
 });

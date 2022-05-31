@@ -11,26 +11,38 @@
                         <div class="mb-4">
                             <label for="exampleInputNama1" class="form-label"><b>Judul Jasa</b></label>
                             {{-- 840px --}}
-                            <input style="width:100%; height:43px;" type="text" class="form-control" id="exampleInputNama1"
-                                placeholder="Judul Jasa" value="{{ Auth::user()->name }}" readonly>
+                            <input name="judul" style="width:100%; height:43px;" type="text" class="form-control"
+                                id="exampleInputNama1" placeholder="Judul Jasa">
                         </div>
                         <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label"><b>Harga Jasa</b></label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Harga Jasa"
-                                value="{{ Auth::user()->email }}" readonly>
+                            {{-- <label for="exampleInputEmail1" class="form-label"><b>Harga Jasa</b></label> --}}
+                            {{-- <input name="harga" type="number" class="form-control" id="exampleInputEmail1" placeholder="Harga Jasa"> --}}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                placeholder="Harga Jasa">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
                         </div>
+
                         <div class="mb-5">
                             <label for="exampleFormControlDesB1" class="form-label"><b>Deskripsi</b></label>
                             <textarea class="form-control" id="exampleFormControlDesB1" placeholder="Deskripsi Biodata"
                                 style="height:200px;"></textarea>
                         </div>
                         <div class="mb-4">
-                            <label for="exampleInputNoHP1" class="form-label"><b>Deskripsi</b></label>
-                            <input type="file" class="form-control">
+                            <label for="exampleInputNoHP1" class="form-label"><b>Gambar Jasa</b></label>
+                            <div id="dvPreview">
+                            </div>
+                            <input type="file" name="filenames[]" class="myfrm form-control" id="fileupload" multiple>
                         </div>
 
                         <button type="submit" value="send" class="btn"
                             style="width: 176px; height: 48px; background: #151E17; border-radius: 33px; color:whitesmoke;">Simpan</button>
+
+
                     </div>
 
                     <hr>
@@ -45,20 +57,21 @@
 
                         </div> --}}
 
-                    <div class="clone hide" id="clone">
+                    {{-- <div class="clone hide" id="clone">
                         <div id="realprocode" class="realprocode control-group lst input-group" style="margin-top:10px">
 
-                            {{-- <div id="dvPreview" > --}}
 
-                            <input type="file" name="filenames[]" class="myfrm form-control" id="fileupload" multiple>
+
+                            
                             <div class="input-group-btn">
                                 <button class="btn btn-danger" id="hapus" type="button"><i
                                         class="fldemo glyphicon glyphicon-remove"></i>
                                     Remove</button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </form>
+
 
 
                 {{-- <form id='post-form' class='post-form' method="post" action="{{ url('/dump') }}"
@@ -73,7 +86,7 @@
 
                 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-                {{-- <script language="javascript" type="text/javascript">
+                <script language="javascript" type="text/javascript">
                     window.onload = function() {
                         var fileUpload = document.getElementById("fileupload");
                         fileUpload.onchange = function() {
@@ -90,6 +103,10 @@
                                             img.height = "100";
                                             img.width = "100";
                                             img.src = e.target.result;
+                                            img.setAttribute(
+                                                'style',
+                                                'margin: 1em',
+                                            );
                                             dvPreview.appendChild(img);
                                         }
                                         reader.readAsDataURL(file);
@@ -104,9 +121,9 @@
                             }
                         }
                     };
-                </script> --}}
+                </script>
 
-                <script>
+                {{-- <script>
                     // $(document).ready(function() {
                         $("#fileupload").select(function() {
                             var lsthmtl = $("#clone").html();
@@ -116,7 +133,7 @@
                             $(this).parents("#realprocode").remove();
                         });
                     // });
-                </script>
+                </script> --}}
 
                 {{-- <script type="text/javascript">
                     window.onload = function() {

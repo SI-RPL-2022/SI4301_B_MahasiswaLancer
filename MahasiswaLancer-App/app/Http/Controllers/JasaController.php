@@ -35,7 +35,43 @@ class JasaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $konsultasi = [];
+        $transaksi = [];
+
+        $validated = $request->validate([
+            'customer_id' => ['required'],
+            'psikolog' => ['required'],
+            'tanggal' => ['required'],
+            'nama' => ['required', 'string', 'max:255'],
+            'no_rek_asal' => ['required', 'max:255'],
+            'no_rek_tujuan' => ['required', 'max:255'],
+            'bukti_transaksi' => ['required', 'image','file'],
+        ]);
+
+        $psikolog = Psikolog::findorFail($request->psikolog);
+
+        $konsultasi['customer_id'] = $request->customer_id;
+        $konsultasi['psikolog_id'] = $psikolog->id;
+        $konsultasi['tanggal'] = $request->tanggal;
+        $konsultasi['status'] = 'Belum Konsultasi';
+
+        $post_konsultasi = Konsultasi::create($konsultasi);
+        // dd($post_konsultasi);
+
+        $bukti_transaksi = time().'_'.$request->nama.'.'.$request->bukti_transaksi->extension();
+
+        $transaksi['konsultasi_id'] = $post_konsultasi->id;
+        $transaksi['customer_id'] = $request->customer_id;
+        $transaksi['status'] = 'Menunggu Konfirmasi';
+        $transaksi['nominal'] = $psikolog->fee;
+        $transaksi['nama_rekening_asal'] = $request->nama;
+        $transaksi['no_rekening_asal'] = $request->no_rek_asal;
+        $transaksi['no_rekening_tujuan'] = $request->no_rek_tujuan;
+        $transaksi['bukti_transaksi'] = $request->file('bukti_transaksi')->storeAs('bukti-transaksi',$bukti_transaksi);
+
+        Transaksi::create($transaksi);
+
+        return redirect()->route('dashboard-user')->with('success', 'User berhasil diubah.');
     }
 
     /**
