@@ -84,6 +84,7 @@
 
             @endauth
 
+            <!-- Log Out -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboa
                 rd="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -104,6 +105,37 @@
                             <a class="btn" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"
                                 style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 219px; background: #121814; border-radius: 10px; color: whitesmoke; height: 60px; ">Logout</a>
+                            <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batalkan Pesanan -->
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboa
+                rd="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="staticBackdropLabel"
+                                style="margin-left:33%;">Batalkan Pesanan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="text-align: center;">
+                            Apakah Anda yakin ingin membatalkan <br>
+                            <a>pesanan ini?</a> 
+                            <br/><br/><br/>
+                        </div>
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn"
+                                style="margin-left:-500px; display: flex; flex-direction: row; justify-content: center; align-items: center; border: 1px solid #000000; box-sizing: border-box; border-radius: 10px; width: 219px; height: 60px;"
+                                data-bs-dismiss="modal">Urungkan</button>
+                            <a class="btn" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                                style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 219px; background: #121814; border-radius: 10px; color: whitesmoke; height: 60px; ">Batalkan Pesanan</a>
                             <form method="POST" id="logout-form" action="{{ route('logout') }}">
                                 @csrf
                             </form>
@@ -176,7 +208,8 @@
                                                                 <td>Desain UI/UX Untuk Aplikasi E-Commerce</td>
                                                                 <td>Supri</td>
                                                                 <td>23-05-2023</td>
-                                                                <td><span class="badge badge-success" style="background-color:rgba(233, 25, 25, 0.14); color: #ff0000">Batalkan</span></td>
+                                                                <td><span class="badge badge-success" style="background-color:rgba(233, 25, 25, 0.14); color: #ff0000" data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop1">Batalkan</span></td>
     
                                                                 <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
                                                             </tr>
@@ -190,7 +223,8 @@
                                                                 <td>Desain Web Desain</td>
                                                                 <td>Supri</td>
                                                                 <td>28-05-2022</td>
-                                                                <td><span class="badge badge-success" style="background-color:rgba(233, 25, 25, 0.14); color: #ff0000">Batalkan</span></td>                                                <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                                                <td><span class="badge badge-success" style="background-color:rgba(233, 25, 25, 0.14); color: #ff0000" data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop1">Batalkan</span></td>                                               <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -382,8 +416,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div> 
           </div>
         </div>
     </div>
