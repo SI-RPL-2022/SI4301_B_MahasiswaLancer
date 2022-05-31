@@ -5,7 +5,7 @@
         <div class="card" style="border-radius: 37px; box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.1);">
             <div class="card-body">
                 <h2 class="card-title">Jasa</h2>
-                <a href="AddJasa.html"><button type="button" class="btn"
+                <a href="{{ route('tambahjasa') }}"><button type="button" class="btn"
                         style="position: absolute; color: #BA181B; left: 80%; top: 32px; background:rgba(186, 24, 27, 0.12); ">+
                         Tambah Jasa</button></a>
                 <div class="d-flex">

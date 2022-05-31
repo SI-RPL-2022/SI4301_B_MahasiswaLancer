@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Routing\RouteGroup;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,8 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 /*Client*/
 Route::middleware(['auth', 'role:client'])->group(function () {
     
+});
+
+Route::post('dump', function (Request $request) {
+    dd($request);
 });
