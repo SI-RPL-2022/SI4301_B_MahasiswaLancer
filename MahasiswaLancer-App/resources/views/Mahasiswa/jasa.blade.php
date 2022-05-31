@@ -16,31 +16,26 @@
                                 <th width="800px"></th>
                                 <th width="100px"></th>
                             </tr>
-                            <tr>
-                                <td><img src="assetsmhs/images/dashboard/image 50.png"
-                                        style=" width:200px; height: auto; padding-bottom: 50px;"></td>
-                                <td><a><b>Deskripsi Detail Jasa 1</b></a>
-                                    <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Tincidunt vestibulum facilisi et rhoncus tempus duis mattis amet id. Amet cras
-                                        dictumst ac tortor aliquam faucibus mattis egestas.consectetur adipiscing elit.
-                                        Tincidunt vestibulum facilisi et rhoncus tempus duis mattis amet id. Amet cras
-                                        dictumst ac tortor aliquam faucibus mattis egestas.consectetur adipiscing elit.
-                                        Tincidunt vestibulum facilisi et rhoncus tempus duis mattis amet id. Amet cras
-                                        dictumst ac tortor aliquam faucibus mattis egestas.consectetur adipiscing elit.
-                                        Tincidunt vestibulum facilisi et rhoncus tempus duis mattis amet id. Amet cras
-                                        dictumst ac tortor aliquam faucibus mattis egestas.</p>
-                                </td>
-                                <td><a href="#" style="margin-right: 10px;">
-                                        <span style="color: green;">
-                                            <i class="fas fa-pen-to-square"></i>
-                                        </span>
-                                    </a><a href="#">
-                                        <span style="color: red;">
-                                            <i class="fas fa-trash-can"></i>
-                                        </span>
-                                    </a></td>
-                            </tr>
-                            <tr>
+                            @foreach ($jasas as $jasa)
+                                <tr>
+                                    <td><img src="{{ url('image',$jasa->gambar) }}"
+                                            style=" width:200px; height: auto; padding-bottom: 50px;"></td>
+                                    <td><a><b>{{ $jasa->judul }}</b></a>
+                                        <p class="desc">{{ $jasa->deskripsi }}</p>
+                                    </td>
+                                    <td><a href="{{ route('editjasa',$jasa) }}" style="margin-right: 10px;">
+                                            <span style="color: green;">
+                                                <i class="fas fa-pen-to-square"></i>
+                                            </span>
+                                        </a><a href="#">
+                                            <span style="color: red;">
+                                                <i class="fas fa-trash-can"></i>
+                                            </span>
+                                        </a></td>
+                                </tr>
+                            @endforeach
+
+                            {{-- <tr>
                                 <td><img src="assetsmhs/images/dashboard/image 50.png"
                                         style="width:200px; height: auto; padding-bottom: 50px;"></td>
                                 <td><a><b>Deskripsi Detail Jasa 2</b></a>
@@ -87,7 +82,7 @@
                                             <i class="fas fa-trash-can"></i>
                                         </span>
                                     </a></td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

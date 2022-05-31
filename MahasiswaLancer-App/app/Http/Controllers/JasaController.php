@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Jasa;
+use App\Models\file;
 use Illuminate\Http\Request;
 
 class JasaController extends Controller
@@ -14,7 +16,17 @@ class JasaController extends Controller
      */
     public function index()
     {
-        return view('Mahasiswa.jasa');
+        $id = Auth::id();
+        $jasa = Jasa::where('userId',$id)->get();
+        // User::where('status', 'VIP')->get();
+        // dd($jasa);
+        foreach ($jasa as $jasa_each){
+            $gambar = file::where('jasa_id',$jasa_each['id'])->first();
+            $jasa_each['gambar'] = $gambar['alamat_gambar'];
+        }
+        // $gambar = file::where('jasa_id',$jasa['id'])->first();
+        // dd($jasa);
+        return view('Mahasiswa.jasa',['jasas'=>$jasa]);
     }
 
     /**
@@ -35,43 +47,47 @@ class JasaController extends Controller
      */
     public function store(Request $request)
     {
-        $konsultasi = [];
-        $transaksi = [];
-
+        // dd();
         $validated = $request->validate([
-            'customer_id' => ['required'],
-            'psikolog' => ['required'],
-            'tanggal' => ['required'],
-            'nama' => ['required', 'string', 'max:255'],
-            'no_rek_asal' => ['required', 'max:255'],
-            'no_rek_tujuan' => ['required', 'max:255'],
-            'bukti_transaksi' => ['required', 'image','file'],
+            'judul' => ['required'],
+            'harga' => ['required'],
+            'deskripsi' => ['required'],
+            'gambar' => ['required'],
+            'gambar.*' => ['image']
         ]);
 
-        $psikolog = Psikolog::findorFail($request->psikolog);
+        
 
-        $konsultasi['customer_id'] = $request->customer_id;
-        $konsultasi['psikolog_id'] = $psikolog->id;
-        $konsultasi['tanggal'] = $request->tanggal;
-        $konsultasi['status'] = 'Belum Konsultasi';
+        $dataJasa = array(
+            Auth::id(),
+            $request->judul,
+            $request->harga,
+            $request->deskripsi
+        );
 
-        $post_konsultasi = Konsultasi::create($konsultasi);
-        // dd($post_konsultasi);
+        $idJasa = Jasa::insertJasa($dataJasa);
 
-        $bukti_transaksi = time().'_'.$request->nama.'.'.$request->bukti_transaksi->extension();
+        $files = [];
+        if($request->hasfile('gambar'))
+        {
+            
+            foreach($request->file('gambar') as $image)
+            {
+                $name = time().rand(1,50).'.'.$image->extension();
+                $image->move('image/', $name);  
 
-        $transaksi['konsultasi_id'] = $post_konsultasi->id;
-        $transaksi['customer_id'] = $request->customer_id;
-        $transaksi['status'] = 'Menunggu Konfirmasi';
-        $transaksi['nominal'] = $psikolog->fee;
-        $transaksi['nama_rekening_asal'] = $request->nama;
-        $transaksi['no_rekening_asal'] = $request->no_rek_asal;
-        $transaksi['no_rekening_tujuan'] = $request->no_rek_tujuan;
-        $transaksi['bukti_transaksi'] = $request->file('bukti_transaksi')->storeAs('bukti-transaksi',$bukti_transaksi);
+                $files[] = $name;  
+                $file= new file();
+                $file->alamat_gambar = $files[0];
+                $file->jasa_id = $idJasa;
+                
+                $file->save();
+            }
+        }
 
-        Transaksi::create($transaksi);
+        
 
-        return redirect()->route('dashboard-user')->with('success', 'User berhasil diubah.');
+        return redirect()->route('jasa')->with('success', 'User berhasil diubah.');
     }
 
     /**
@@ -93,7 +109,8 @@ class JasaController extends Controller
      */
     public function edit(Jasa $jasa, $id)
     {
-        return view('Mahasiswa.editjasa');
+        $jasa = Jasa::findorfail($id);
+        return view('Mahasiswa.editjasa',['jasa'=>$jasa]);
     }
 
     /**

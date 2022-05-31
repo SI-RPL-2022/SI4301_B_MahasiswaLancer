@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JasaController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Routing\RouteGroup;
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
         Route::post('/tambah/post', [App\Http\Controllers\JasaController::class, 'store'])->name('tambahjasapost');
         Route::get('/edit/{$id}', [App\Http\Controllers\JasaController::class, 'edit'])->name('editjasa');
         Route::post('/edit/{$id}/update', [App\Http\Controllers\JasaController::class, 'update'])->name('editjasapost');
+        Route::post('/hapus/{$id}', [App\Http\Controllers\JasaController::class, 'destroy'])->name('hapusjasa');
     });
    
 
@@ -49,11 +51,11 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 
 /*Client*/
 Route::middleware(['auth', 'role:client'])->group(function () {
-    
+    Route::get('/status', function(){return view('Client.StatusPengerjaan');})->name('statuspengerjaan');
 });
 
 Route::get('tes', function(){
-    return view('editJasa');
+    return view('Client.StatusPengerjaan');
 })->name('tes');
 
 Route::post('dump', function (Request $request) {

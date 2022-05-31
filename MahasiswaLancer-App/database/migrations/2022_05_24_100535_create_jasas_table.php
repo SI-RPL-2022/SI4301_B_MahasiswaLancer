@@ -13,12 +13,12 @@ class CreateJasasTable extends Migration
      */
     public function up()
     {
-        Schema::create('jasa', function (Blueprint $table) {
+        Schema::create('jasas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('userId');
             $table->string('judul');
             $table->integer('harga');
             $table->text('deskripsi');
-            $table->string('file');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateJasasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jasa');
+        Schema::dropIfExists('jasas');
     }
 }

@@ -6597,13 +6597,13 @@ textarea.form-control-lg {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #f2edf3;
+  background-color: #ffff;
   background-clip: padding-box;
   border: 1px solid #ebedf2;
   border-radius: 0.3rem;
   outline: 0; }
 
-.modal-backdrop {
+/* .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -6614,7 +6614,7 @@ textarea.form-control-lg {
   .modal-backdrop.fade {
     opacity: 0; }
   .modal-backdrop.show {
-    opacity: 0.5; }
+    opacity: 0.5; } */
 
 .modal-header {
   display: -webkit-box;
@@ -6629,7 +6629,7 @@ textarea.form-control-lg {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 1rem 1rem;
-  border-bottom: 1px solid #ebedf2;
+  border-bottom: 1px solid #ffff;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px); }
   .modal-header .btn-close {
