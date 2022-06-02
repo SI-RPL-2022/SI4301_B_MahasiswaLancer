@@ -19,7 +19,7 @@
             <div class="row" style="background-color: #DAE3DC;">
                 <div class="py-4 px-0" style="width: 100%;">
                     <div class="d-flex justify-content-between">
-                        
+
                         <!-- Logo -->
                         <div style="padding-left: 80px;">
                             <a class="navbar-brand" href="#">
@@ -43,9 +43,22 @@
                         @auth
 
                             <div class="hstack" style="padding-right: 30px;">
-                                <img class="rounded-circle" alt="40x40"
+                                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                    <img class="rounded-circle" width="40px" height="40px"
+                                        src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                @else
+                                    {{ Auth::user()->name }}
+
+                                    <svg class="ms-2" width="40px" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                @endif
+                                {{-- <img class="rounded-circle" alt="40x40"
                                     src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                                    data-holder-rendered="true" style=" width: 40px;height: 40px;">
+                                    data-holder-rendered="true" style=" width: 40px;height: 40px;"> --}}
                                 <div class="dropdown">
                                     <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
                                         style="margin-left: 15px;">
@@ -53,17 +66,18 @@
                                     </button>
                                     <ul class="dropdown-menu" style="border-radius: 10px; border-color: #DAE3DC;">
                                         @role('mahasiswa')
-
-                                        <li><a class="dropdown-item text-center" href="{{ route('biodata') }}">Dashboard</a>
-                                        </li>
-
+                                            <li><a class="dropdown-item text-center"
+                                                    href="{{ route('biodata') }}">Dashboard</a>
+                                            </li>
                                         @endrole
                                         @role('client')
-
-                                        <li><a class="dropdown-item text-center" href="{{ route('statuspengerjaan') }}">Status Pengerjaan</a></li>
-
+                                            <li><a class="dropdown-item text-center"
+                                                    href="{{ route('profile.show') }}">Profil</a>
+                                            </li>
+                                            <li><a class="dropdown-item text-center"
+                                                    href="{{ route('statuspengerjaan') }}">Status Pengerjaan</a></li>
                                         @endrole
-                                        
+
                                         <hr class="m-1">
                                         <li><a class="dropdown-item text-danger text-center" href="#" data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">Logout</a></li>
@@ -75,7 +89,7 @@
                                 <a class="nav-link text-black mx-3" href="{{ route('login') }}"><b>Masuk</b></a>
 
                                 <a href="{{ route('register') }}" class="nav-link btn text-light px-3 py-1 mx-3"
-                                            style="background-color: #151E17; border-radius: 86px; width: 100px;"><b>Daftar</b></a>
+                                    style="background-color: #151E17; border-radius: 86px; width: 100px;"><b>Daftar</b></a>
                             </div>
 
                         @endauth
@@ -138,19 +152,21 @@
 
                     <div class="container" style="padding-top: 60px;">
                         <!-- card1 -->
+
                         <div class="card-group">
-                            <div class="card" style="border-color: #F3F9F3;">
-                                <img src="asset-images/search.png" class="card-img-top" alt="..."
-                                    style="width: 100px; padding-top: 50px; padding-left: 40px;">
-                                <div class="card-body" style="padding-left: 40px;">
-                                    <h6 class="card-title"><b>Pilih Jasa yang Sesuai</b></h6>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consecter adipising elit. Elit
-                                        urna tellus feugiat
-                                        lacus sit.</p>
-                                    <br>
-                                    <a class="text-black" href=""><u><b>Learn More</b></u></a>
+                                <div class="card" style="border-color: #F3F9F3;">
+                                    <img src="asset-images/search.png" class="card-img-top" alt="..."
+                                        style="width: 100px; padding-top: 50px; padding-left: 40px;">
+                                    <div class="card-body" style="padding-left: 40px;">
+                                        <h6 class="card-title"><b>Pilih Jasa yang Sesuai</b></h6>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consecter adipising elit.
+                                            Elit
+                                            urna tellus feugiat
+                                            lacus sit.</p>
+                                        <br>
+                                        <a class="text-black" href=""><u><b>Learn More</b></u></a>
+                                    </div>
                                 </div>
-                            </div>
                             <!-- card2 -->
                             <div class="card"
                                 style="border-color: #F3F9F3; background-color: rgba(255, 255, 255, 0.6);">
@@ -216,8 +232,11 @@
                     <h4 style="padding-top: 80px; padding-left: 11%; color: #E5A426;"><b>Jasa Terpopuler</b></h4>
                     <div class="row" style="padding-left: 11%;">
                         <!-- Card 1 -->
+                        
                         <div class="card"
                             style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 340px; background-color: #202922;">
+                            
+                            <a href="{{ route('detailjasa') }}" class="text-dark">
                             <img src="asset-images/gambar card.png" class="card-img-top" alt="..."
                                 style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
                             <div class="card-body px-4">
@@ -234,6 +253,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                         <!-- Card 2 -->

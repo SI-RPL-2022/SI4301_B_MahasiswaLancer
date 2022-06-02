@@ -54,9 +54,13 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/status', function(){return view('Client.StatusPengerjaan');})->name('statuspengerjaan');
 });
 
-Route::get('tes', function(){
-    return view('Client.StatusPengerjaan');
-})->name('tes');
+Route::get('Jasa/', function(){
+    return view('Client.detailjasa');
+})->name('detailjasa');
+
+// Route::get('tes', function(){
+//     return view('Client.detailjasa');
+// })->name('tes');
 
 Route::post('dump', function (Request $request) {
     dd($request);
