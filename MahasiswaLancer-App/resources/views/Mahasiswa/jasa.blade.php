@@ -28,7 +28,7 @@
                                                 <i class="fas fa-pen-to-square"></i>
                                             </span>
                                         </a>
-                                        <form method="POST" action="{{ route('hapusjasa') }}">
+                                        <form method="POST" action="{{ route('hapusjasa') }}" onsubmit="return confirm('Apakah anda ingin menghapus jasa ini ?')">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
 

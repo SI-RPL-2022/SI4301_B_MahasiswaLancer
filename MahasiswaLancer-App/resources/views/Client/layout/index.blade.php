@@ -59,7 +59,7 @@
                         <ul class="dropdown-menu" style="border-radius: 10px; border-color: #DAE3DC;">
                             <li><a class="dropdown-item text-center" href="{{ route('biodata') }}">Profile</a>
                             </li>
-                            <li><a class="dropdown-item text-center" href="#">Status Pengerjaan</a></li>
+                            <li><a class="dropdown-item text-center" href="{{ route('statuspengerjaan') }}">Status Pengerjaan</a></li>
                             <li><a class="dropdown-item text-danger text-center" href="#" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop">Logout</a></li>
                         </ul>

@@ -38,12 +38,12 @@
                         <textarea name="deskripsi" class="form-control" id="exampleFormControlDesB1" placeholder="Deskripsi Biodata"
                             style="height:200px;"> {{ $jasa->deskripsi }}</textarea>
                     </div>
-                    {{-- <div class="mb-4">
+                    <div class="mb-4">
                         <label for="exampleInputNoHP1" class="form-label"><b>Gambar Jasa</b></label>
                         <div id="dvPreview">
                         </div>
                         <input type="file" name="gambar[]" class="myfrm form-control" id="fileupload" multiple>
-                    </div> --}}
+                    </div>
 
                     <button type="submit" class="btn"
                         style="width: 176px; height: 48px; background: #151E17; border-radius: 33px; color:whitesmoke;">Simpan</button>

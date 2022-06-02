@@ -138,23 +138,23 @@ class JasaController extends Controller
 
         $jasa->update();
 
-        // $files = [];
-        // if($request->hasfile('gambar'))
-        // {
+        $files = [];
+        if($request->hasfile('gambar'))
+        {
             
-        //     foreach($request->file('gambar') as $image)
-        //     {
-        //         $name = time().rand(1,50).'.'.$image->extension();
-        //         $image->move('image/', $name);  
+            foreach($request->file('gambar') as $image)
+            {
+                $name = time().rand(1,50).'.'.$image->extension();
+                $image->move('image/', $name);  
 
-        //         $files[] = $name;  
-        //         $file= new file();
-        //         $file->alamat_gambar = $files[0];
-        //         $file->jasa_id = $id;
+                $files[] = $name;  
+                $file= new file();
+                $file->alamat_gambar = $files[0];
+                $file->jasa_id = $id;
                 
-        //         $file->save();
-        //     }
-        // }
+                $file->save();
+            }
+        }
         
         return redirect()->back()->with('success', 'User berhasil dibuat.');
     }
