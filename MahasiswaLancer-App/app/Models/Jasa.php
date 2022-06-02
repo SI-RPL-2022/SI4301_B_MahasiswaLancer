@@ -39,4 +39,5 @@ class Jasa extends Model
         $id_jasa = Jasa::create($jasa);
         return $id_jasa->id;
     }
+
 }

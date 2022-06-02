@@ -18,20 +18,29 @@
                             </tr>
                             @foreach ($jasas as $jasa)
                                 <tr>
-                                    <td><img src="{{ url('image',$jasa->gambar) }}"
+                                    <td><img src="{{ url('image', $jasa->gambar) }}"
                                             style=" width:200px; height: auto; padding-bottom: 50px;"></td>
                                     <td><a><b>{{ $jasa->judul }}</b></a>
                                         <p class="desc">{{ $jasa->deskripsi }}</p>
                                     </td>
-                                    <td><a href="{{ route('editjasa',$jasa) }}" style="margin-right: 10px;">
+                                    <td class="d-flex"><a href="{{ route('editjasa', [$jasa->id]) }}" style="margin-right: 10px;">
                                             <span style="color: green;">
                                                 <i class="fas fa-pen-to-square"></i>
                                             </span>
-                                        </a><a href="#">
-                                            <span style="color: red;">
-                                                <i class="fas fa-trash-can"></i>
-                                            </span>
-                                        </a></td>
+                                        </a>
+                                        <form method="POST" action="{{ route('hapusjasa') }}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+
+                                            <input type="hidden" name="id" value="{{ $jasa->id }}" id="">
+
+                                            <button type="submit" class="btn p-0">
+                                                <span style="color: red;">
+                                                    <i class="fas fa-trash-can"></i>
+                                                </span>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
 

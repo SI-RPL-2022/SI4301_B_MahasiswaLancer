@@ -87,7 +87,7 @@ class JasaController extends Controller
 
         
 
-        return redirect()->route('jasa')->with('success', 'User berhasil diubah.');
+        return redirect()->route('jasa')->with('success', 'User berhasil dibuat.');
     }
 
     /**
@@ -107,9 +107,10 @@ class JasaController extends Controller
      * @param  \App\Models\Jasa  $jasa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jasa $jasa, $id)
+    public function edit(Jasa $jasa, int $id)
     {
         $jasa = Jasa::findorfail($id);
+        // dd($jasa);
         return view('Mahasiswa.editjasa',['jasa'=>$jasa]);
     }
 
@@ -120,9 +121,42 @@ class JasaController extends Controller
      * @param  \App\Models\Jasa  $jasa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jasa $jasa)
+    public function update(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'gambar',
+            'gambar.*' => ['image']
+        ]);
+
+        // dd($request);
+        $id = $request->id;
+        $jasa = Jasa::findorfail($id);
+
+        $jasa['judul'] = $request->judul;
+        $jasa['harga'] = (int) $request->harga;
+        $jasa['deskripsi'] = $request->deskripsi;
+
+        $jasa->update();
+
+        // $files = [];
+        // if($request->hasfile('gambar'))
+        // {
+            
+        //     foreach($request->file('gambar') as $image)
+        //     {
+        //         $name = time().rand(1,50).'.'.$image->extension();
+        //         $image->move('image/', $name);  
+
+        //         $files[] = $name;  
+        //         $file= new file();
+        //         $file->alamat_gambar = $files[0];
+        //         $file->jasa_id = $id;
+                
+        //         $file->save();
+        //     }
+        // }
+        
+        return redirect()->back()->with('success', 'User berhasil dibuat.');
     }
 
     /**
@@ -131,8 +165,11 @@ class JasaController extends Controller
      * @param  \App\Models\Jasa  $jasa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jasa $jasa)
+    public function destroy(Request $request)
     {
-        //
+        $jasa = Jasa::findorfail($request->id);
+
+        $jasa->delete();
+        return redirect()->back()->with('success', 'User berhasil dihapus.');
     }
 }
