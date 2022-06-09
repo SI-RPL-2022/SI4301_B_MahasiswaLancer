@@ -21,12 +21,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link-dark" id="pills-waiting-tab" data-toggle="pill" href="#pills-waiting"
-                                role="tab" aria-controls="pills-contact" aria-selected="false"
+                                role="tab" aria-controls="pills-waiting" aria-selected="false"
                                 style="border-radius: 37px;">Dalam Pengerjaan</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link link-dark" id="pills-result-tab" data-toggle="pill" href="#pills-result"
+                                role="tab" aria-controls="pills-result" aria-selected="false"
+                                style="border-radius: 37px;">Konfirmasi Hasil</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link link-dark" id="pills-end-tab" data-toggle="pill" href="#pills-end" role="tab"
-                                aria-controls="pills-contact" aria-selected="false" style="border-radius: 37px;">Selesai</a>
+                                aria-controls="pills-end" aria-selected="false" style="border-radius: 37px;">Selesai</a>
                         </li>
                     </ul>
                     <div class="card-body"></div>
@@ -212,6 +217,80 @@
                                                             <td>Desain Web Desain</td>
                                                             <td>Supri</td>
                                                             <td>28-05-2022</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--ISI DARI TAB KONFIRMASI HASIL-->
+                        <div class="tab-pane fade" id="pills-result" role="tabpanel" aria-labelledby="pills-result-tab">
+
+                            <div class="container mt-0 px-1">
+                                <div class="d-flex justify-content-center row">
+                                    <div class="col-md-15">
+                                        <div class="rounded">
+                                            <div class="table-responsive table-borderless">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">
+                                                                <div class="toggle-btn">
+                                                                    <div class="inner-circle"></div>
+                                                                </div>
+                                                            </th>
+                                                            <th>ID Order</th>
+                                                            <th>Jasa</th>
+                                                            <th>MahasiswaLancer</th>
+                                                            <th>Deadline</th>
+                                                            <th>Action</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-body">
+                                                        <tr class="cell-1">
+                                                            <td class="text-center">
+                                                                <div class="toggle-btn">
+                                                                    <div class="inner-circle"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>13487</td>
+                                                            <td>Desain UI/UX Untuk Aplikasi E-Commerce</td>
+                                                            <td>Supri</td>
+                                                            <td>23-05-2023</td>
+                                                            <td><span class="badge badge-success"
+                                                                    style="background-color:rgba(255, 255, 255, 1); color: #000000" data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop2"><u>Lihat Hasil</u></span></td>
+                                                            <td><span class="badge badge-success"
+                                                                    style="background-color:rgba(233, 25, 25, 0.14); color: #ff0000">Revisi</span></td>
+                                                            <td><span class="badge badge-success"
+                                                                    style="background-color:rgba(35, 170, 68, 0.13); color: #23AA44">Terima</span></td>
+
+                                                            <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                                        </tr>
+                                                        <tr class="cell-1">
+                                                            <td class="text-center">
+                                                                <div class="toggle-btn">
+                                                                    <div class="inner-circle"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>13488</td>
+                                                            <td>Desain Web Desain</td>
+                                                            <td>Supri</td>
+                                                            <td>28-05-2022</td>
+                                                            <td><span class="badge badge-success"
+                                                                    style="background-color:rgba(255, 255, 255, 1); color: #000000" data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop2"><u>Lihat Hasil</u></span></td>
+                                                            <td><span class="badge badge-success"
+                                                                    style="background-color:rgba(233, 25, 25, 0.14); color: #ff0000">Revisi</span></td>
+                                                            <td><span class="badge badge-success"
+                                                                    style="background-color:rgba(35, 170, 68, 0.13); color: #23AA44">Terima</span></td>
+                                                            <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
