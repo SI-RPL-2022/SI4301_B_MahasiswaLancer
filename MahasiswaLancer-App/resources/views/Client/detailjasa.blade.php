@@ -48,7 +48,7 @@
     
     <div class="container">
       <h3 style="padding-top: 60px; padding-left: 50px;">Desain UI/UX untuk Apps dan Website menggunakan Figma</h3>
-      <div class="container" style="width: 1215px; padding-top: 40px;">
+      <div class="container" style="width: 1215px; padding-top: 40px; text-align:justify;">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt vestibulum facilisi et rhoncus tempus duis mattis amet id. Amet cras dictumst ac tortor aliquam faucibus mattis egestas. Volutpat neque dis eu purus sed pellentesque consequat, in enim. Magna est mauris lectus sagittis sagittis nisl. Maecenas porttitor semper tortor, tellus consequat amet. Diam aliquet id massa molestie risus elit mattis.
             Tincidunt ut morbi sit tellus tellus. Quis in leo lobortis in. Facilisis quis in id sed. Diam lobortis orci sollicitudin mauris. Aenean elementum magna augue eu. 
             
@@ -92,8 +92,8 @@
           <div class="row" style="width: 1150px;">
 
             <!-- Card 1 -->
-            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 320px; background-color: #FFFFFF;">
-              <img src="images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
+            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; background-color: #FFFFFF;">
+              <img src="asset-images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
               <div class="card-body px-4">
                 <p class="card-title "><b>Desain UI/UX untuk Apps dan
                   Website menggunakan Figma</b></p>
@@ -110,8 +110,8 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 320px; background-color: #FFFFFF;">
-              <img src="images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
+            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; background-color: #FFFFFF;">
+              <img src="asset-images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
               <div class="card-body px-4">
                 <p class="card-title "><b>Desain UI/UX untuk Apps dan
                   Website menggunakan Figma</b></p>
@@ -127,8 +127,8 @@
               </div>
             </div>
             <!-- Card 3 -->
-            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 320px; background-color: #FFFFFF;">
-              <img src="images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
+            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; background-color: #FFFFFF;">
+              <img src="asset-images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
               <div class="card-body px-4">
                 <p class="card-title "><b>Desain UI/UX untuk Apps dan
                   Website menggunakan Figma</b></p>
@@ -145,8 +145,8 @@
             </div>
 
             <!-- Card 4 -->
-            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 320px; background-color: #FFFFFF;">
-              <img src="images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
+            <div class="card" style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; background-color: #FFFFFF;">
+              <img src="asset-images/gambar card.png" class="card-img-top" alt="..." style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
               <div class="card-body px-4">
                 <p class="card-title "><b>Desain UI/UX untuk Apps dan
                   Website menggunakan Figma</b></p>
@@ -170,13 +170,7 @@
     </div>
         
     </div>
-    <section id="Grafik" class="row" style="background-color: #121814;">
-      <div class="container text-center">
-          <br>
-          <img src="images/LOGO MAHASWISA LANCER white.png" alt="Avatar Logo" style="width:250px; margin-top: 50px;">
-          <p class="text-center text-white m-t-20 m-b-100" style="margin-left: 150px; margin-right: 150px;">“MahasiswaLancer” merupakan sebuah platform yang dapat menghubungkan user yang membutuhkan jasa untuk menyelesaikan proyeknya dan mahasiswa yang menawarkan jasanya dengan skill yang dimilikinya.</p>
-      </div>
-  </section>
+  
 @endsection
 
 
