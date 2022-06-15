@@ -59,9 +59,10 @@ Route::get('Jasa/', function(){
 })->name('detailjasa');
 
 // Route::get('tes', function(){
-//     return view('Client.detailjasa');
+//     return view('Client.pembayaranBerhasil');
 // })->name('tes');
 
 Route::post('dump', function (Request $request) {
     dd($request);
 });
+
