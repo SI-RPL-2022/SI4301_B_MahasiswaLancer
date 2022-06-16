@@ -1,0 +1,1063 @@
+@charset "UTF-8";
+@import "modular-scale";
+@import "compass";
+
+//  ==================
+//  Offcanvas Settings
+//  ==================
+
+$offcanvas-width: 17em !default;
+$offcanvas-left-width: $offcanvas-width;
+$offcanvas-right-width: $offcanvas-width;
+$offset--left: 17em !default;
+$offset--right: 17em !default;
+$offset--top: 12.5em !default;
+$offset--bottom: 12.5em !default;
+$offcanvas-content-reveal-left-offset: $offset--left !default;
+$offcanvas-content-reveal-right-offset: $offset--right !default;
+
+//content
+$offset-content-wrap--left: 17em !default;
+$offset-content-wrap--right: $offset-content-wrap--left !default;
+
+// position
+$offcanvas-enable-left: true !default;
+$offcanvas-enable-right: true !default;
+$offcanvas-enable-top: true !default;
+$offcanvas-enable-bottom: true !default;
+// style
+$offcanvas-enable-overlay: true !default;
+$offcanvas-enable-push: true !default;
+$offcanvas-enable-reveal: true !default;
+
+$supportCSSTransforms: true !default;
+// z-index
+$elements: body-text, offcanvas-reveal, offcanvas-content-wrap, header,
+  offcanvas-overlay, offcanvas, offcanvas-trigger, offcanvas-panel,
+  offcanvas-btn;
+
+// https://material.google.com/motion/duration-easing.html#duration-easing-common-durations
+$deceleration-curve: cubic-bezier(0, 0, 0.2, 1); //Easing out
+$acceleration-curve: cubic-bezier(0.4, 0, 1, 1); // Easing in
+$sharp-curve: cubic-bezier(0.4, 0, 0.6, 1);
+$standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
+
+//  ================
+//  Offcanvas Mixins
+//  ================
+
+//GPU acceleration
+%u-ha {
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+%u-offcanvas-animate {
+  transition: transform 300ms $sharp-curve;
+}
+
+%is-open {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+}
+
+@mixin offcanvas(
+  $position: left,
+  $offset: $offcanvas-width,
+  $overlay: false,
+  $reveal: $offcanvas-enable-reveal
+) {
+  @if $position == "left" {
+    width: $offcanvas-left-width;
+    transform: translate3d(-$offset, 0, 0);
+
+    @if ($supportCSSTransforms == false) {
+      &.c-offcanvas--support-no-transitions {
+        left: -$offset--left;
+        &.is-open {
+          left: 0;
+        }
+      }
+    }
+  }
+  @if ($position == "right") {
+    width: $offcanvas-right-width;
+    right: 0;
+    transform: translate3d($offset, 0, 0);
+  } @else if ($position == "top") {
+    left: 0;
+    right: 0;
+    top: 0;
+    height: $offset;
+    min-height: auto;
+    width: 100%;
+    transform: translate3d(0, -$offset, 0);
+  } @else if ($position == "bottom") {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: $offset;
+    min-height: auto;
+    width: 100%;
+    transform: translate3d(0, $offset, 0);
+  }
+}
+
+@mixin offcanvas-content(
+  $position: left,
+  $offset: $offcanvas-width,
+  $reveal: true
+) {
+  @if ($reveal == true) {
+    @if ($position == "right") {
+      &.is-open {
+        transform: translate3d(-$offset, 0, 0);
+      }
+    }
+    @if ($position == "left") {
+      &.is-open {
+        transform: translate3d($offset, 0, 0);
+      }
+    }
+  }
+}
+
+@mixin offcanvas-bg($position: left, $offset: $offcanvas-width) {
+  @if ($position == "right") {
+    &.is-open {
+      transform: translate3d(-$offset, 0, 0);
+    }
+  }
+  @if ($position == "left") {
+    &.is-open {
+      transform: translate3d($offset, 0, 0);
+    }
+  }
+}
+
+/**
+ * Offcanvas-content-wrap
+*/
+
+.c-offcanvas-content-wrap {
+  position: relative;
+  z-index: index($elements, offcanvas-content-wrap);
+  overflow: hidden;
+}
+
+/**
+ * Offcanvas Panel
+*/
+
+.c-offcanvas {
+  @extend %u-ha;
+  @extend %u-offcanvas-animate;
+  position: fixed;
+  min-height: 100%;
+  max-height: none;
+  top: 0;
+  display: block;
+  background: #fff;
+  overflow: hidden;
+
+  &.is-open {
+    @extend %is-open;
+  }
+  &--opening {
+    transition-timing-function: $sharp-curve;
+  }
+  &.is-closed {
+    //width: 0; IE10 BUG
+    max-height: 100%;
+    overflow: hidden;
+    visibility: hidden;
+    box-shadow: none;
+  }
+}
+
+.c-offcanvas.is-scrollable {
+  overflow-y: auto;
+}
+
+.c-offcanvas--overlay {
+  z-index: index($elements, offcanvas);
+}
+
+.c-offcanvas--reveal {
+  z-index: index($elements, offcanvas-reveal);
+}
+
+/**
+ * Offcanvas BG-Overlay
+*/
+
+.c-offcanvas-bg {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: index($elements, offcanvas-overlay);
+  left: -100%;
+  background-color: transparent;
+  transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+  &.is-animating,
+  &.is-open {
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.68);
+    visibility: visible;
+  }
+
+  &.is-closed {
+    visibility: hidden;
+  }
+}
+
+/**
+ * Position Left
+ *
+*/
+
+@if ($offcanvas-enable-left == true) {
+  .c-offcanvas--left {
+    height: 100%;
+    @include offcanvas(
+      left,
+      $offset--left,
+      $offcanvas-enable-overlay,
+      $offcanvas-enable-push
+    );
+  }
+
+  @if ($supportCSSTransforms == false) {
+    .c-offcanvas.c-offcanvas--support-no-transitions {
+      left: -$offset--left;
+
+      .c-offcanvas--left {
+        &.c-offcanvas--overlay,
+        &.c-offcanvas--push,
+        &.is-open {
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+/**
+ *  Position Right
+ *
+*/
+
+@if ($offcanvas-enable-right == true) {
+  .c-offcanvas--right {
+    height: 100%;
+    @include offcanvas(
+      right,
+      $offset--right,
+      $offcanvas-enable-overlay,
+      $offcanvas-enable-push
+    );
+  }
+}
+
+/**
+ * Position Top
+ *
+*/
+
+@if ($offcanvas-enable-top == true) {
+  .c-offcanvas--top {
+    @include offcanvas(
+      top,
+      $offset--top,
+      $offcanvas-enable-overlay,
+      $offcanvas-enable-push
+    );
+  }
+}
+
+/**
+ * Position Bottom
+ *
+*/
+
+@if ($offcanvas-enable-bottom == true) {
+  .c-offcanvas--bottom {
+    @include offcanvas(
+      bottom,
+      $offset--bottom,
+      $offcanvas-enable-overlay,
+      $offcanvas-enable-push
+    );
+  }
+}
+
+/**
+ * Reveal
+ *
+*/
+
+@if ($offcanvas-enable-reveal == true) {
+  .c-offcanvas-content-wrap {
+    @extend %u-ha;
+    @extend %u-offcanvas-animate;
+    z-index: index($elements, offcanvas-content-wrap);
+  }
+
+  .c-offcanvas-content-wrap--reveal {
+    //Left
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-content-wrap--left {
+        @include offcanvas-content(left, $offcanvas-content-reveal-left-offset);
+      }
+    }
+    // Right
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-content-wrap--right {
+        @include offcanvas-content(
+          right,
+          $offcanvas-content-reveal-right-offset
+        );
+      }
+    }
+  }
+
+  .c-offcanvas--reveal {
+    z-index: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .c-offcanvas-bg.c-offcanvas-bg--reveal {
+    @extend %u-offcanvas-animate;
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-bg--left {
+        @include offcanvas-bg(left, $offset--left);
+      }
+    }
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-bg--right {
+        @include offcanvas-bg(right, $offset--right);
+      }
+    }
+  }
+}
+
+/**
+ * Push
+ *
+*/
+@if ($offcanvas-enable-push== true) {
+  .c-offcanvas--push {
+    z-index: index($elements, offcanvas);
+    &--opening {
+      transition-timing-function: $deceleration-curve;
+    }
+  }
+
+  .c-offcanvas-content-wrap {
+    @extend %u-ha;
+    @extend %u-offcanvas-animate;
+    z-index: index($elements, offcanvas-content-wrap);
+  }
+
+  .c-offcanvas-content-wrap--push {
+    //Left
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-content-wrap--left {
+        @include offcanvas-content(left, $offcanvas-content-reveal-left-offset);
+      }
+    }
+    // Right
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-content-wrap--right {
+        @include offcanvas-content(
+          right,
+          $offcanvas-content-reveal-right-offset
+        );
+      }
+    }
+  }
+
+  .c-offcanvas-bg.c-offcanvas-bg--push {
+    @extend %u-offcanvas-animate;
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-bg--left {
+        @include offcanvas-bg(left, $offset--left);
+      }
+    }
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-bg--right {
+        @include offcanvas-bg(right, $offset--right);
+      }
+    }
+  }
+}
+
+//  ==========================================================================
+//  Codepen Demo
+//  ==========================================================================
+
+// Settings
+$base-font-size: 16px !default;
+$base-line-height: 24px !default;
+$base-text-color: #333 !default;
+$base-background-color: #fff !default;
+$base-font-family: "Roboto", sans-serif !default;
+$base-spacing-unit: $base-line-height;
+$base-spacing-unit--tiny: round($base-spacing-unit / 4);
+$base-spacing-unit--small: round($base-spacing-unit / 2);
+$base-spacing-unit--large: round($base-spacing-unit * 2);
+$base-spacing-unit--huge: round($base-spacing-unit * 4);
+
+$gray0: #fff;
+$gray50: #fafafa;
+$gray100: #f5f5f5;
+$gray200: #eee;
+$gray300: #e0e0e0;
+$gray400: #bdbdbd;
+$gray500: hsl(0, 0%, 62%);
+$gray600: #757575;
+$gray700: #616161;
+$gray800: #424242;
+$gray900: #212121;
+
+$color-btn-green: #8ecd73;
+$color-btn-blue: #378bb5;
+//sass-mq
+$mq-breakpoints: (
+  mobile: 320px,
+  phablet: 660px,
+  tablet: 740px,
+  desktop: 980px,
+  wide: 1300px
+) !default;
+
+// modular scale
+$ms-base: 1em, 1.18em;
+$ms-ratio: 1.618;
+$ms-fluid: false;
+$ms-range: 1.2 20em, 1.35 41.25em, 1.4 46.25em, 1.5 61.25em, 1.6 81.25em;
+//$start: 1; $end:25;
+//@debug ms-list($start, $end, $ms-base, $ms-ratio);
+
+// Mixins
+@mixin hocus() {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin hidden-visually() {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+}
+@mixin nbfc {
+  overflow: hidden;
+}
+
+// Micro clearfix (http://nicolasgallagher.com/micro-clearfix-hack/)
+@mixin clearfix {
+  &:after,
+  &:before {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Button modifiers
+@mixin button-colour(
+  $fill-colour,
+  $text-colour,
+  $hover-colour,
+  $hover-border: $hover-colour,
+  $border-color: $fill-colour
+) {
+  color: $text-colour;
+  background-color: $fill-colour;
+  border-color: $border-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $hover-colour;
+    border-color: $hover-border;
+    outline: none;
+  }
+}
+
+// @link https://github.com/sass-mq/sass-mq
+$mq-base-font-size: 16px !default;
+$mq-responsive: true !default;
+$mq-breakpoints: (
+  mobile: 320px,
+  tablet: 740px,
+  desktop: 980px,
+  wide: 1300px
+) !default;
+$mq-static-breakpoint: desktop !default;
+$mq-show-breakpoints: () !default;
+$mq-media-type: all !default;
+@function mq-px2em($px, $base-font-size: $mq-base-font-size) {
+  @if unitless($px) {
+    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels.";
+    @return mq-px2em($px * 1px, $base-font-size);
+  } @else if unit($px) == em {
+    @return $px;
+  }
+  @return ($px / $base-font-size) * 1em;
+}
+@function mq-get-breakpoint-width($name, $breakpoints: $mq-breakpoints) {
+  @if map-has-key($breakpoints, $name) {
+    @return map-get($breakpoints, $name);
+  } @else {
+    @warn "Breakpoint #{$name} wasn't found in $breakpoints.";
+  }
+}
+@mixin mq(
+  $from: false,
+  $until: false,
+  $and: false,
+  $media-type: $mq-media-type,
+  $breakpoints: $mq-breakpoints,
+  $responsive: $mq-responsive,
+  $static-breakpoint: $mq-static-breakpoint
+) {
+  $min-width: 0;
+  $max-width: 0;
+  $media-query: "";
+
+  // From: this breakpoint (inclusive)
+  @if $from {
+    @if type-of($from) == number {
+      $min-width: mq-px2em($from);
+    } @else {
+      $min-width: mq-px2em(mq-get-breakpoint-width($from, $breakpoints));
+    }
+  }
+
+  // Until: that breakpoint (exclusive)
+  @if $until {
+    @if type-of($until) == number {
+      $max-width: mq-px2em($until);
+    } @else {
+      $max-width: mq-px2em(mq-get-breakpoint-width($until, $breakpoints)) -
+        0.01em;
+    }
+  }
+
+  // Responsive support is disabled, rasterize the output outside @media blocks
+  // The browser will rely on the cascade itself.
+  @if $responsive == false {
+    $static-breakpoint-width: mq-get-breakpoint-width(
+      $static-breakpoint,
+      $breakpoints
+    );
+    $target-width: mq-px2em($static-breakpoint-width);
+
+    // Output only rules that start at or span our target width
+    @if (
+      $and ==
+        false and
+        $min-width <=
+        $target-width and
+        ($until == false or $max-width >= $target-width)
+    ) {
+      @content;
+    }
+  }
+
+  // Responsive support is enabled, output rules inside @media queries
+  @else {
+    @if $min-width != 0 {
+      $media-query: "#{$media-query} and (min-width: #{$min-width})";
+    }
+    @if $max-width != 0 {
+      $media-query: "#{$media-query} and (max-width: #{$max-width})";
+    }
+    @if $and {
+      $media-query: "#{$media-query} and #{$and}";
+    }
+
+    // Remove unnecessary media query prefix 'all and '
+    @if ($media-type == "all" and $media-query != "") {
+      $media-type: "";
+      $media-query: str-slice(unquote($media-query), 6);
+    }
+
+    @media #{$media-type + $media-query} {
+      @content;
+    }
+  }
+}
+
+@mixin mq-add-breakpoint($name, $width) {
+  $new-breakpoint: (
+    $name: $width
+  );
+  $mq-breakpoints: map-merge($mq-breakpoints, $new-breakpoint) !global;
+}
+
+@mixin mq-show-breakpoints(
+  $show-breakpoints: $mq-show-breakpoints,
+  $breakpoints: $mq-breakpoints
+) {
+  body:before {
+    background-color: #fcf8e3;
+    border-bottom: 1px solid #fbeed5;
+    border-left: 1px solid #fbeed5;
+    color: #c09853;
+    font: small-caption;
+    padding: 3px 6px;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    // Loop through the breakpoints that should be shown
+    @each $show-breakpoint in $show-breakpoints {
+      $width: mq-get-breakpoint-width($show-breakpoint, $breakpoints);
+      @include mq($show-breakpoint, $breakpoints: $breakpoints) {
+        content: "#{$show-breakpoint} â‰¥ #{$width} (#{mq-px2em($width)})";
+      }
+    }
+  }
+}
+@if length($mq-show-breakpoints) > 0 {
+  @include mq-show-breakpoints;
+}
+
+%u-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Utilities
+
+.u-unstyled {
+  @extend %u-unstyled;
+}
+
+.u-pos-relative {
+  position: relative !important;
+}
+
+.u-hidden-visually {
+  @include hidden-visually();
+}
+
+.u-text-center {
+  text-align: center;
+}
+
+[tabindex="-1"]:focus {
+  outline: 0;
+}
+
+.o-list-inline {
+  @extend %u-unstyled;
+  padding: 0;
+  list-style: none;
+  > li {
+    display: inline-block;
+  }
+}
+
+html {
+  @include nbfc();
+  font-size: ($base-font-size / 16px) * 1em;
+  font-family: $base-font-family;
+  line-height: $base-line-height / $base-font-size;
+  background-color: $base-background-color;
+  color: $base-text-color;
+  overflow-y: scroll;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+// Type
+p {
+  @include ms-respond(font-size, 1);
+  margin-bottom: 1.18em;
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(66, 66, 66, 1);
+}
+
+h1 {
+  @include ms-respond(font-size, 5);
+  margin: 0 0 1em 0;
+  line-height: 1.1;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h2 {
+  @include ms-respond(font-size, 3);
+  line-height: 1em;
+  font-weight: 400;
+  font-style: normal;
+  padding: 0 0 ms(-3);
+  margin: ms(1) 0 ms(1) 0;
+  text-transform: capitalize;
+  text-indent: -2px;
+}
+
+h3 {
+  @include ms-respond(font-size, 2);
+  margin: ms(1) 0 ms(-1) 0;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.188em;
+  color: hsl(0, 0%, 17%);
+  text-indent: -1px;
+}
+
+h4 {
+  @include ms-respond(font-size, 1);
+  font-weight: 300;
+  line-height: 1.409em;
+  margin: 1em 0 0 0;
+  letter-spacing: 1px;
+  color: rgba(114, 114, 114, 1);
+  text-transform: uppercase;
+}
+
+// Wrapper
+.l-wrapper {
+  max-width: 100%;
+  //@include ms-respond(max-width, 10);
+  margin: 0 auto;
+  padding-right: $base-spacing-unit--small;
+  padding-left: $base-spacing-unit--small;
+
+  @include mq(phablet) {
+    padding-right: $base-spacing-unit;
+    padding-left: $base-spacing-unit;
+  }
+
+  @include mq(tablet) {
+    max-width: ms(15);
+  }
+
+  @include mq(wide) {
+    max-width: ms(16);
+  }
+}
+
+// Button
+.c-button {
+  background: transparent;
+  background-image: linear-gradient(
+    transparent,
+    transparent 50%,
+    rgba(0, 0, 0, 0.08)
+  );
+  background-color: #4e4e4e;
+  border-color: #4e4e4e;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
+  font-weight: 300;
+  margin: 0;
+  padding: ms(-4) ms(-1);
+  margin: 0 0 ms(-4);
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  overflow: hidden;
+  vertical-align: middle;
+  @include hocus {
+    color: #fafafa;
+  }
+
+  @include mq(tablet) {
+    font-size: ms(1);
+  }
+}
+
+.c-button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.c-button:hover,
+.c-button:focus,
+.c-button:active {
+  outline: 0;
+  text-decoration: none;
+}
+.c-button:focus:not(:hover) {
+  outline: 4px solid #c5dbfc;
+}
+
+.c-button--hard {
+  border-radius: 0;
+}
+
+.c-button--green {
+  @include button-colour(
+    $color-btn-green,
+    #ffffff,
+    lighten($color-btn-green, 5%)
+  );
+}
+
+.c-button--blue {
+  @include button-colour(
+    $color-btn-blue,
+    #ffffff,
+    darken($color-btn-blue, 10%)
+  );
+}
+
+.c-offcanvas .c-button {
+  margin-bottom: 0;
+}
+
+.c-button--close-bottom {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  z-index: 10;
+  margin-left: -37px;
+  @include hocus() {
+    outline: none !important;
+  }
+}
+
+.c-button--close-right-top {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  border-radius: 0;
+  @include hocus() {
+    outline: none !important;
+  }
+}
+
+.c-button--close-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  left: 0;
+  @include hocus() {
+    outline: none !important;
+  }
+}
+
+// https://philipwalton.github.io/solved-by-flexbox/demos/input-add-ons/
+.c-input {
+  &:focus {
+    z-index: 1;
+    outline: 0;
+    border-color: $gray600;
+    box-shadow: inset 0 0 5px hsla(0, 0%, 0, 0.2);
+  }
+}
+
+.c-input-add-on {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1.5em;
+}
+
+.c-input-add-on__field {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c-input-add-on__field:not(:first-child) {
+  margin-left: -1px;
+}
+
+.c-input-add-on__field:not(:last-child) {
+  border-right: 0;
+}
+
+.c-input-add-on__item {
+  margin: 0;
+}
+
+.c-input-add-on__field,
+.c-input-add-on__item {
+  border: 1px solid hsla(31, 15%, 50%, 0.25);
+  padding: 0.5em 0.75em;
+}
+
+.c-input-add-on__field:first-child,
+.c-input-add-on__item:first-child {
+  border-radius: 2px 0 0 2px;
+}
+
+.c-input-add-on__field:last-child,
+.c-input-add-on__item:last-child {
+  border-radius: 0 2px 2px 0;
+}
+
+// Menu
+.c-menu {
+  margin: 0;
+}
+
+.c-menu--border .c-menu__item {
+  border-bottom: 1px solid $gray300;
+}
+
+.c-menu__item--heading {
+  padding: ms(1);
+  text-indent: -#{ms(-5)};
+  @include ms-respond(font-size, 2);
+}
+
+.c-menu__link {
+  display: block;
+  width: 100%;
+  padding: ms(-3) ms(1);
+  text-decoration: none;
+  line-height: ms(2);
+  color: rgba(43, 43, 43, 0.9);
+  @include ms-respond(font-size, 1);
+  background: $gray50;
+  @include hocus() {
+    color: $gray900;
+    outline: none;
+    text-decoration: none;
+    background: $gray200;
+  }
+}
+
+.c-menu--small {
+  .c-menu__link {
+    font-size: ms(1);
+  }
+}
+
+//Page
+.c-page {
+  @include nbfc();
+  @include ms-respond(padding-top, 5);
+}
+
+.c-offcanvas--overflow-top {
+  overflow: visible;
+}
+
+body,
+.c-offcanvas-content-wrap {
+  min-height: 100vh;
+  background-color: $gray100;
+}
+
+.c-offcanvas--shadow.is-closed:after {
+  content: none;
+}
+
+.c-offcanvas--shadow:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.c-offcanvas--shadow-left:after {
+  left: 0;
+}
+
+.c-offcanvas--shadow-right:after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.c-offcanvas--bottom.is-open {
+  box-shadow: 0 -5px 25px hsla(0, 0%, 2%, 0.38);
+}
+
+.c-offcanvas-bg--push.c-offcanvas-bg--push {
+  background: transparent;
+}
+
+.c-offcanvas--push {
+  &.c-offcanvas--left {
+    border-right: 1px solid $gray300;
+  }
+  &.c-offcanvas--right {
+    border-left: 1px solid $gray300;
+  }
+}
+
+.c-offcanvas--top .c-menu__item {
+  display: inline-flex;
+}
+
+.c-callout {
+  border: 2px solid $gray400;
+  border-radius: 5px;
+  background: $gray200;
+  padding: ms(1);
+  margin-top: ms(5);
+}
+
+.c-callout__title {
+  margin: 0;
+}
+
+.c-callout__text {
+  @include ms-respond(font-size, -1);
+  margin-top: 0;
+  color: $gray600;
+}
+
+.c-callout__button {
+  width: 100%;
+}
+
+.c-callout__footer {
+  color: $gray800;
+  @include ms-respond(font-size, -1);
+  a {
+    color: inherit;
+    text-decoration: none;
+    @include hocus() {
+      color: $gray900;
+      outline: none;
+      text-decoration: underline;
+    }
+  }
+}

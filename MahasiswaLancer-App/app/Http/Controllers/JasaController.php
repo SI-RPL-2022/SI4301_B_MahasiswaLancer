@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Jasa;
 use App\Models\file;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class JasaController extends Controller
@@ -96,9 +97,22 @@ class JasaController extends Controller
      * @param  \App\Models\Jasa  $jasa
      * @return \Illuminate\Http\Response
      */
-    public function show(Jasa $jasa)
+    // Jasa $jasa
+    public function show()
     {
-        //
+        $jasa = Jasa::all()->take(4);
+        // $cover = file::where('jasa_id',$jasa_each['id'])->first();
+        
+        foreach ($jasa as $jasa_each){
+            $cover = file::where('jasa_id',$jasa_each['id'])->first();
+            $jasa_each['cover'] = $cover['alamat_gambar'];
+
+            $nama = User::findorfail($jasa_each['userId'])->name;
+            $jasa_each['user'] = $nama;
+        }
+        // dd($jasa);
+        // dd($jasa);
+        return view('Client.detailjasa',['jasa'=>$jasa]);
     }
 
     /**

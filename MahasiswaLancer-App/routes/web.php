@@ -43,8 +43,11 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
         Route::delete('/hapus', [App\Http\Controllers\JasaController::class, 'destroy'])->name('hapusjasa');
     });
    
+    Route::prefix('biodata')->group(function () {
+        Route::get('/', [App\Http\Controllers\BiodataMHSController::class, 'index'])->name('biodata');
+        Route::put('/update', [App\Http\Controllers\BiodataMHSController::class, 'update'])->name('updatebiodata');
+    });
 
-    Route::get('/biodata', [App\Http\Controllers\BiodataMHSController::class, 'index'])->name('biodata');
     Route::get('/statuspekerjaanMHS', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'index'])->name('statusPekerjaan');  
     
 });
@@ -54,15 +57,24 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/status', function(){return view('Client.StatusPengerjaan');})->name('statuspengerjaan');
 });
 
-Route::get('Jasa/', function(){
+Route::get('/Jasa', [App\Http\Controllers\JasaController::class, 'show'])->name('detailjasa');
+
+Route::get('tes', function(){
     return view('Client.detailjasa');
-})->name('detailjasa');
+})->name('tes');
 
 // Route::get('tes', function(){
 //     return view('Client.pembayaranBerhasil');
 // })->name('tes');
 
-Route::post('dump', function (Request $request) {
-    dd($request);
-});
+// Route::post('dump', function (Request $request) {
+//     dd($request);
+// });
 
+// Route::get('dump', function () {
+//     return view('dump');
+// });
+
+// Route::get('newdump', function () {
+//     return view('newdump');
+// });

@@ -8,6 +8,13 @@ var infoColor = getComputedStyle(document.body).getPropertyValue('--info');
 var darkColor = getComputedStyle(document.body).getPropertyValue('--dark');
 var lightColor = getComputedStyle(document.body).getPropertyValue('--light');
 
+// if (typeof jQuery == 'undefined') {
+// 	alert('oh no');
+// }
+// else{
+// 	alert( typeof jQuery);
+// }
+
 (function($) {
   'use strict';
   $(function() {
@@ -23,7 +30,7 @@ var lightColor = getComputedStyle(document.body).getPropertyValue('--light');
     function addActiveClass(element) {
       if (current === "") {
         //for root url
-        if (element.attr('href').indexOf("index.html") !== -1) {
+        if (element.attr('href').indexOf("/") !== -1) {
           element.parents('.nav-item').last().addClass('active');
           if (element.parents('.sub-menu').length) {
             element.closest('.collapse').addClass('show');

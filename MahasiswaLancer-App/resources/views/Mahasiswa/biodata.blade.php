@@ -13,7 +13,9 @@
 
                                         <a href="{{ route('profile.show') }}" class="text-dark" style="text-decoration: none;width:fit-content;display:block;margin:1em auto;">Edit Profile</a>
 
-                <form>
+                <form  method="post" action="{{ route('updatebiodata') }}">
+                    @csrf
+                    <input type="hidden" name="_method" value="PUT">
                     <div style="margin-left: 5%; margin-right: 5%; margin-top: 65px; padding-bottom: 150px;">
                         <div class="mb-4">
                             <label for="exampleInputNama1" class="form-label"><b>Nama
@@ -30,13 +32,13 @@
                         <div class="mb-4">
                             <label for="exampleInputNoHP1" class="form-label"><b>No
                                     Hp</b></label>
-                            <input type="email" class="form-control" id="exampleInputNoHP1" placeholder="No Hp">
+                            <input name="no_hp" type="text" class="form-control" id="exampleInputNoHP1" placeholder="No Hp" value="{{ Auth::user()->no_hp }}">
                         </div>
                         <div class="mb-5">
                             <label for="exampleFormControlDesB1" class="form-label"><b>Deskripsi
                                     Biodata</b></label>
-                            <textarea class="form-control" id="exampleFormControlDesB1" placeholder="Deskripsi Biodata"
-                                style="height:271px;"></textarea>
+                            <textarea name="deskripsi" class="form-control" id="exampleFormControlDesB1" placeholder="Deskripsi Biodata"
+                                style="height:271px;">{{ Auth::user()->deskripsi }}</textarea>
                         </div>
                         <button type="submit" class="btn"
                             style="width: 176px; height: 48px; background: #151E17; border-radius: 33px; color:whitesmoke;">Simpan</button>
