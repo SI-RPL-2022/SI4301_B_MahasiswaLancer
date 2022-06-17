@@ -23,6 +23,7 @@ class BiodataMHSController extends Controller
 
         $user['no_hp'] = $request->no_hp;
         $user['deskripsi'] = $request->deskripsi;
+        $user['keahlian'] = $request->keahlian;
 
         $user->update();
 

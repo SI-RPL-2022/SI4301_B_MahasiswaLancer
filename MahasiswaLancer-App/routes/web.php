@@ -17,9 +17,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('LandingPage');
-})->name('landingpage');
+Route::get('/', [App\Http\Controllers\JasaController::class, 'landingpage'])->name('landingpage'); 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -55,13 +53,14 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 /*Client*/
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/status', function(){return view('Client.StatusPengerjaan');})->name('statuspengerjaan');
+    Route::get('/Jasa/{id}/konfirmasi-pesanan', [App\Http\Controllers\TransaksiController::class, 'create'])->name('konfirmasipesanan');
 });
 
-Route::get('/Jasa', [App\Http\Controllers\JasaController::class, 'show'])->name('detailjasa');
+Route::get('/Jasa/{id}', [App\Http\Controllers\JasaController::class, 'show'])->name('detailjasa');
 
-Route::get('tes', function(){
-    return view('Client.detailjasa');
-})->name('tes');
+Route::get('/tes_view', function(){
+    return view('Client.konfirmasiPesanan');
+})->name('tes_view');
 
 // Route::get('tes', function(){
 //     return view('Client.pembayaranBerhasil');

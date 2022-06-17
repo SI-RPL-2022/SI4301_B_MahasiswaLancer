@@ -30,13 +30,15 @@
                                 value="{{ Auth::user()->email }}" readonly>
                         </div>
                         <div class="mb-4">
-                            <label for="exampleInputNoHP1" class="form-label"><b>No
-                                    Hp</b></label>
+                            <label for="exampleInputKeahlian" class="form-label"><b>Keahlian</b></label>
+                            <input name="keahlian" type="text" class="form-control" id="exampleInputKeahlian" placeholder="Keahlian" value="{{ Auth::user()->keahlian }}">
+                        </div>
+                        <div class="mb-4">
+                            <label for="exampleInputNoHP1" class="form-label"><b>No Hp</b></label>
                             <input name="no_hp" type="text" class="form-control" id="exampleInputNoHP1" placeholder="No Hp" value="{{ Auth::user()->no_hp }}">
                         </div>
                         <div class="mb-5">
-                            <label for="exampleFormControlDesB1" class="form-label"><b>Deskripsi
-                                    Biodata</b></label>
+                            <label for="exampleFormControlDesB1" class="form-label"><b>Deskripsi Biodata</b></label>
                             <textarea name="deskripsi" class="form-control" id="exampleFormControlDesB1" placeholder="Deskripsi Biodata"
                                 style="height:271px;">{{ Auth::user()->deskripsi }}</textarea>
                         </div>

@@ -138,8 +138,8 @@
 
                             <div class="navbar-menu-wrapper d-flex align-items-stretch">
 
-                                <button class="c-button js-offcanvas-trigger"
-                                    data-offcanvas-trigger="off-canvas-left-push">Left - Push</button>
+                                {{-- <button class="c-button js-offcanvas-trigger"
+                                    data-offcanvas-trigger="off-canvas-left-push">Left - Push</button> --}}
                                 <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                                     data-toggle="minimize">
                                     <span class="mdi mdi-menu"></span>

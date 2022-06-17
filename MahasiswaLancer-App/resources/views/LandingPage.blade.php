@@ -79,8 +79,8 @@
                                         @endrole
 
                                         <hr class="m-1">
-                                        <li><a class="dropdown-item text-danger text-center" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop">Logout</a></li>
+                                        <li><a class="dropdown-item text-danger text-center" href="#"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop">Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,7 +111,8 @@
                                         <button type="button" class="btn"
                                             style="margin-left:-500px; display: flex; flex-direction: row; justify-content: center; align-items: center; border: 1px solid #000000; box-sizing: border-box; border-radius: 10px; width: 219px; height: 60px;"
                                             data-bs-dismiss="modal">Batalkan</button>
-                                        <a class="btn" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        <a class="btn" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();"
                                             style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 219px; background: #121814; border-radius: 10px; color: whitesmoke; height: 60px; ">Logout</a>
                                         <form method="POST" id="logout-form" action="{{ route('logout') }}">
@@ -154,24 +155,24 @@
                         <!-- card1 -->
 
                         <div class="card-group">
-                                <div class="card" style="border-color: #F3F9F3;">
-                                    <img src="asset-images/search.png" class="card-img-top" alt="..."
-                                        style="width: 100px; padding-top: 50px; padding-left: 40px;">
-                                    <div class="card-body" style="padding-left: 40px;">
-                                        <h6 class="card-title"><b>Pilih Jasa yang Sesuai</b></h6>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consecter adipising elit.
-                                            Elit
-                                            urna tellus feugiat
-                                            lacus sit.</p>
-                                        <br>
-                                        <a class="text-black" href=""><u><b>Learn More</b></u></a>
-                                    </div>
+                            <div class="card" style="border-color: #F3F9F3;">
+                                <img src="asset-images/search.png" class="card-img-top" alt="..."
+                                    style="width: 100px; padding-top: 50px; padding-left: 40px;">
+                                <div class="card-body" style="padding-left: 40px;">
+                                    <h6 class="card-title"><b>Pilih Jasa yang Sesuai</b></h6>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consecter adipising elit.
+                                        Elit
+                                        urna tellus feugiat
+                                        lacus sit.</p>
+                                    <br>
+                                    <a class="text-black" href=""><u><b>Learn More</b></u></a>
                                 </div>
+                            </div>
                             <!-- card2 -->
                             <div class="card"
                                 style="border-color: #F3F9F3; background-color: rgba(255, 255, 255, 0.6);">
-                                <img src="asset-images/two-users.png" class="card-img-top p-t-50 m-l-40" alt="..."
-                                    style="width: 100px; padding-top: 50px; padding-left: 40px;">
+                                <img src="asset-images/two-users.png" class="card-img-top p-t-50 m-l-40"
+                                    alt="..." style="width: 100px; padding-top: 50px; padding-left: 40px;">
                                 <div class="card-body" style="padding-left: 40px;">
                                     <h6 class="card-title"><b>Pilih Jasa yang Sesuai</b></h6>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consecter adipising elit. Elit
@@ -213,20 +214,73 @@
                     </div>
                 </div>
         </section>
-
+        <style>
+            .deskripsi {
+                margin-right: -100px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                width: 200px;
+                height: 20px;
+            }
+        </style>
         <section id="jasa">
             <div class="row" style="background: #121814; padding-bottom: 80px;">
-                <div class="container" style="padding-top: 80px;">
+                <div class="container" style="padding-top: 80px; min-height: 400px">
                     <h1 class="text-center text-white"><b>Berbagai Pilihan Jasa</b></h1>
                     <h1 class="text-center text-white p-t-20"><b>Sesuai Kebutuhanmu</b></h1>
                     <!-- card -->
                     <div class="row" style="padding-left: 11%;">
+
+                        @foreach ($jasas as $jasaeach)
+                            <div class="card"
+                                style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 340px; background-color: #202922;">
+                                <a href="{{ route('detailjasa', [$jasaeach->id]) }}" class="text-dark">
+                                    <img src="/image/{{ $jasaeach->cover }}" class="card-img-top" alt="..."
+                                        style="width: 100%; height:180px; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
+                                    <div class="card-body px-4">
+                                        <p class="card-title text-white"><b>{{ $jasaeach->judul }}</b></p>
+                                        <p class="card-text" style="color: #E5A426;"><b>{{ $jasaeach->harga }}0</b>
+                                        </p>
+                                        <div class="row p-t-10">
+                                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                                <div class="col-sm-2">
+                                                    <img width="30px" class="rounded-circle"
+                                                        src="{{ $jasaeach->profil }}"
+                                                        alt="{{ $jasaeach->user }}" />
+                                                </div>
+                                                <div class="col">
+                                                    <p class="text-white deskripsi">{{ $jasaeach->user }}</p>
+                                                </div>
+                                            @else
+                                                <div class="col-sm-2">
+                                                    <svg class="ms-2" width="30px;"
+                                                        xmlns="{{ url('http://www.w3.org/2000/svg') }}"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="text-white deskripsi">{{ $jasaeach->user }}</p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+
+
+
                         <!-- Card 1 -->
-                        
-                        <div class="card"
+
+                        {{-- <div class="card"
                             style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 340px; background-color: #202922;">
-                            
-                            <a href="{{ route('detailjasa') }}" class="text-dark">
+
+
                             <img src="asset-images/gambar card.png" class="card-img-top" alt="..."
                                 style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
                             <div class="card-body px-4">
@@ -235,8 +289,8 @@
                                 <p class="card-text" style="color: #E5A426;"><b>Rp. 350.000</b></p>
                                 <div class="row p-t-10">
                                     <div class="col-sm-2">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" alt="..."
-                                            class="rounded-circle" style="width: 30px;">
+                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                            alt="..." class="rounded-circle" style="width: 30px;">
                                     </div>
                                     <div class="col">
                                         <p class="text-white">Shobrul Jamel</p>
@@ -244,71 +298,24 @@
                                 </div>
                             </div>
                             </a>
-                        </div>
+                        </div> --}}
 
-                        <!-- Card 2 -->
-                        <div class="card"
-                            style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 340px; background-color: #202922;">
-                            <img src="asset-images/gambar card.png" class="card-img-top" alt="..."
-                                style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
-                            <div class="card-body px-4">
-                                <p class="card-title text-white"><b>Desain UI/UX untuk Apps dan
-                                        Website menggunakan Figma</b></p>
-                                <p class="card-text" style="color: #E5A426;"><b>Rp. 350.000</b></p>
-                                <div class="row p-t-10">
-                                    <div class="col-sm-2">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" alt="..."
-                                            class="rounded-circle" style="width: 30px;">
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-white">Shobrul Jamel</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="card"
-                            style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 340px; background-color: #202922;">
-                            <img src="asset-images/gambar card.png" class="card-img-top" alt="..."
-                                style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
-                            <div class="card-body px-4">
-                                <p class="card-title text-white"><b>Desain UI/UX untuk Apps dan
-                                        Website menggunakan Figma</b></p>
-                                <p class="card-text" style="color: #E5A426;"><b>Rp. 350.000</b></p>
-                                <div class="row p-t-10">
-                                    <div class="col-sm-2">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" alt="..."
-                                            class="rounded-circle" style="width: 30px;">
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-white">Shobrul Jamel</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="card"
-                            style="width: 17rem; margin-top: 40px; border-radius: 30px; margin-left:15px; padding: 0; height: 340px; background-color: #202922;">
-                            <img src="asset-images/gambar card.png" class="card-img-top" alt="..."
-                                style="width: 100%; border-top-left-radius: 30px; border-top-right-radius: 30px; ">
-                            <div class="card-body px-4">
-                                <p class="card-title text-white"><b>Desain UI/UX untuk Apps dan
-                                        Website menggunakan Figma</b></p>
-                                <p class="card-text" style="color: #E5A426;"><b>Rp. 350.000</b></p>
-                                <div class="row p-t-10">
-                                    <div class="col-sm-2">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" alt="..."
-                                            class="rounded-circle" style="width: 30px;">
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-white">Shobrul Jamel</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
                 </div>
+
+                @if (count($jasas)==0)
+                    <div class="row-fluid bottom">
+                        <br>
+                        <br>
+                        <p class="text-center" style="color:#C1C1C1;">
+                            _________________________________________________________________________________
+                        </p>
+                        <h3 class="text-center" style="color:#C1C1C1;">Belum ada pilihan jasa yang tersedia
+                            ...
+                        </h3>
+                    </div>
+                @endif
             </div>
         </section>
 

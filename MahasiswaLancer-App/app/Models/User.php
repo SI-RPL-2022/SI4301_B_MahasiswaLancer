@@ -31,7 +31,8 @@ class User extends Authenticatable
         'password',
 
         'no_hp',
-        'deskripsi'
+        'deskripsi',
+        'keahlian'
     ];
 
     /**

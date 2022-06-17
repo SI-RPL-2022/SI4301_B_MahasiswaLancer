@@ -10,6 +10,23 @@ use Illuminate\Http\Request;
 
 class JasaController extends Controller
 {
+    public function landingpage()
+    {
+        $jasa = Jasa::all();
+        foreach ($jasa as $jasa_each){
+            $cover = file::where('jasa_id',$jasa_each['id'])->first();
+            $jasa_each['cover'] = $cover['alamat_gambar'];
+
+            $user = User::findorfail($jasa_each['userId']);
+
+            $nama = $user->name;
+            $profil = $user->profile_photo_url;
+            $jasa_each['user'] = $nama;
+            $jasa_each['profil'] = $profil;
+        }
+        // dd($jasa);
+        return view('LandingPage',['jasas'=>$jasa]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -68,10 +85,11 @@ class JasaController extends Controller
 
         $idJasa = Jasa::insertJasa($dataJasa);
 
+        // dd($request->file('gambar'));
         $files = [];
         if($request->hasfile('gambar'))
         {
-            
+            $counter = 0;
             foreach($request->file('gambar') as $image)
             {
                 $name = time().rand(1,50).'.'.$image->extension();
@@ -79,8 +97,10 @@ class JasaController extends Controller
 
                 $files[] = $name;  
                 $file= new file();
-                $file->alamat_gambar = $files[0];
+                $file->alamat_gambar = $files[$counter];
                 $file->jasa_id = $idJasa;
+
+                $counter +=1;
                 
                 $file->save();
             }
@@ -98,8 +118,15 @@ class JasaController extends Controller
      * @return \Illuminate\Http\Response
      */
     // Jasa $jasa
-    public function show()
+    public function show(Jasa $jasa, int $id)
     {
+        $tampil_jasa = Jasa::findorfail($id);
+        $tampil_user = User::findorfail($tampil_jasa['userId']);
+        // dd($tampil_jasa);
+
+        $tampil_jasa_cover = file::where('jasa_id',$id)->get('alamat_gambar');
+        // dd($tampil_jasa_cover);
+
         $jasa = Jasa::all()->take(4);
         // $cover = file::where('jasa_id',$jasa_each['id'])->first();
         
@@ -107,12 +134,15 @@ class JasaController extends Controller
             $cover = file::where('jasa_id',$jasa_each['id'])->first();
             $jasa_each['cover'] = $cover['alamat_gambar'];
 
-            $nama = User::findorfail($jasa_each['userId'])->name;
+            $user = User::findorfail($jasa_each['userId']);
+
+            $nama = $user->name;
+            $profil = $user->profile_photo_url;
             $jasa_each['user'] = $nama;
+            $jasa_each['profil'] = $profil;
         }
         // dd($jasa);
-        // dd($jasa);
-        return view('Client.detailjasa',['jasa'=>$jasa]);
+        return view('Client.detailjasa',['jasas'=>$jasa, 'cover'=>$tampil_jasa_cover, 'user'=>$tampil_user, 'detail_jasa'=>$tampil_jasa]);
     }
 
     /**
