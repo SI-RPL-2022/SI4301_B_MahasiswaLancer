@@ -23,6 +23,7 @@ class CreateTransaksisTable extends Migration
             $table->text('deskripsi')->nullable();
             $table->string('deadline')->nullable();
             $table->string('link_pendukung')->nullable();
+            $table->string('status_pesanan')->nullable();
             $table->timestamps();
         });
     }

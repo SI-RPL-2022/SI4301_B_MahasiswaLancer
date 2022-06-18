@@ -11,8 +11,9 @@
         <div class="card" style="border-radius: 37px; width:947px; box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.1); left:18em;">
             <div class="card-body">
                 <h4 style="width:fit-content;display:block;margin:1em auto;"><b>Ringkasan Pesanan</b> </h4>
-                <form method="post" action="" enctype="multipart/form-data">
+                <form method="post" action="{{ route('konfirmasipesananpost', [$detail_jasa->id]) }}" enctype="multipart/form-data">
                     @csrf
+                    <input name="id_jasa" value="{{ $detail_jasa->id }}" type="text" hidden>
                     <div style="margin-left: 5%; margin-right: 5%; margin-top: 40px; padding-bottom: 60px;">
                         <div class="mb-4">
                             <table class="table table-borderless" style="margin-top: 40px;">
@@ -62,7 +63,7 @@
 
                         <div class="mb-4">
                             <label class="form-label"><b>No HP</b></label>
-                            <input name="NoHP" type="number" class="form-control" placeholder="No HP"
+                            <input name="no_hp" type="number" class="form-control" placeholder="No HP"
                                 value="{{ Auth::user()->no_hp }}">
                         </div>
 
@@ -113,9 +114,9 @@
                         <label for="basic-url">Lampirkan Link File Pendukung (Opsional)</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3"><i class="mdi mdi-link"></i>https://example.com/users/</span>
+                                <span class="input-group-text text-light" id="basic-addon3" style="background-color: #5C5C5C"><i class="mdi mdi-link"></i> Link File</span>
                             </div>
-                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            <input name="link" type="url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                         </div>
                         <button type="submit" class="btn"
                             style="width: 255px; height: 48px; 

@@ -96,15 +96,15 @@
                 <div class="container">
                     <div class="mb-1">
                         <p>Order ID</p>
-                        <p class="fw-bold" style="margin-top: -10px">12308923</p>
+                        <p class="fw-bold" style="margin-top: -10px">{{ $rekap['order_id'] }}</p>
                     </div>
                     <div class="mb-1">
                         <p>Nama</p>
-                        <p class="fw-bold" style="margin-top: -10px">{{ Auth::user()->name }}</p>
+                        <p class="fw-bold" style="margin-top: -10px">{{ $rekap['nama'] }}</p>
                     </div>
                     <div class="mb-1">
                         <p>Email</p>
-                        <p class="fw-bold" style="margin-top: -10px">{{ Auth::user()->email }}</p>
+                        <p class="fw-bold" style="margin-top: -10px">{{ $rekap['email'] }}</p>
                     </div>
                     <div class="mb-1 mt-5">
                         <label class="form-label">Produk</label>
@@ -116,21 +116,21 @@
                                     <th width="200px"></th>
                                 </tr>
                                 <tr>
-                                    <td><img src="assetsmhs/images/dashboard/image 50.png" style=" width:213px; height: auto; padding-bottom: 50px; padding-left:40px;"></td>
-                                    <td><a><b>Desain UI/UX apps dan mobile</b></a>
+                                    <td><img src="/image/{{ $rekap['cover'] }}" style=" width:213px; height: 160px; padding-bottom: 50px; padding-left:40px;"></td>
+                                    <td><a><b>{{ $rekap['jasa'] }}</b></a>
                                         <p>
                                         <div class="row p-t-10">
                                             <div class="col-sm-1">
                                                 <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" alt="..." class="rounded-circle" style="width: 30px;">
                                             </div>
                                             <div class="col">
-                                                <p class="">&nbsp;&nbsp;Shobrul Jamel</p>
+                                                <p class="">&nbsp;&nbsp;{{ $rekap['mahasiswa'] }}</p>
                                             </div>
                                         </div>
                                         </p>
                                     </td>
                                     <td class="d-flex">
-                                        <p class="card-text" style="padding-right:40px;"><b>Rp. 350.000</b></p>
+                                        <p class="card-text" style="padding-right:40px;"><b>Rp. {{ $rekap['harga'] }}</b></p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -150,30 +150,42 @@
                             <p style="font-size:14px;">Harga Produk</p>
                         </div>
                         <div class="col" style="padding-left:70px;">
-                            <p style="font-size:14px;">Rp. 350.000</p>
+                            <p style="font-size:14px;">Rp. {{ $rekap['harga'] }}</p>
                         </div>
                     </div>
-                    <div class="row" style="width:140%; margin-top:-10px;">
+                    {{-- <div class="row" style="width:140%; margin-top:-10px;">
                         <div class="col" style="margin-left:-20px;">
                             <p style="font-size:14px;">Diskon</p>
                         </div>
                         <div class="col" style="padding-left:70px;">
                             <p style="font-size:14px;">Rp. 50.000</p>
                         </div>
-                    </div>
+                    </div> --}}
                     <hr style="width: 290px; height: 3px; background: #949393; margin-left:-20px; margin-top:-0.1px;">
                     <div class="row" style="width:140%; margin-top:-10px;">
                         <div class="col" style="margin-left:-20px;">
                             <p style="font-size:14px; width:120px;"><b>Total Pembayaran</b></p>
                         </div>
                         <div class="col" style="padding-left:70px;">
-                            <p style="font-size:14px;"><b>Rp. 300.000</b></p>
+                            <p style="font-size:14px;"><b>Rp. {{ $rekap['harga'] }}</b></p>
                         </div>
                     </div>
-                    <button type="submit" class="btn" style="width: 270px; height: 43px; 
-                                   background: linear-gradient(111.38deg, #E5A426 11.9%, #DFBE0F 128.68%); border-radius: 10px; 
-                                   color:whitesmoke; margin-top:40px;
-                                   ">Pilih Metode Bayar</button>
+                    <style>
+                        .tombol-submit {
+                            width: 270px;
+                            height: 43px;
+                            background: #949393;
+                            border-radius: 10px;
+                            color: whitesmoke;
+                            margin-top: 40px;
+                        }
+
+                        .tombol-submit:hover {
+                            background: #E5A426;
+                            color: whitesmoke;
+                        }
+                    </style>
+                    <a href="{{ route('metodepembayaran', [$rekap['order_id']] ) }}" class="btn tombol-submit" >Pilih Metode Bayar</a>
                 </div>
             </div>
         </div>

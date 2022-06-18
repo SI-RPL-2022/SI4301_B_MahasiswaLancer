@@ -52,8 +52,21 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 
 /*Client*/
 Route::middleware(['auth', 'role:client'])->group(function () {
-    Route::get('/status', function(){return view('Client.StatusPengerjaan');})->name('statuspengerjaan');
+    Route::get('/status', [App\Http\Controllers\TransaksiController::class, 'index'])->name('statuspengerjaan');
     Route::get('/Jasa/{id}/konfirmasi-pesanan', [App\Http\Controllers\TransaksiController::class, 'create'])->name('konfirmasipesanan');
+    Route::post('/Jasa/{id}/konfirmasi-pesanan/post', [App\Http\Controllers\TransaksiController::class, 'store'])->name('konfirmasipesananpost');
+    Route::get('/pesanan-berhasil/{id}', [App\Http\Controllers\TransaksiController::class, 'viewberhasilpesan'])->name('berhasilpesan');
+
+    Route::post('/action/batalkan', [App\Http\Controllers\TransaksiController::class, 'batalkan'])->name('batalkan');
+    Route::post('/action/terima', [App\Http\Controllers\TransaksiController::class, 'terima'])->name('terima');
+    Route::post('/action/revisi', [App\Http\Controllers\TransaksiController::class, 'revisi'])->name('revisi');
+
+    Route::prefix('pembayaran')->group(function () {
+        Route::get('/{id}', [App\Http\Controllers\TransaksiController::class, 'pembayaran'])->name('pembayaran');
+        Route::get('/{id}/pilih-metode', [App\Http\Controllers\TransaksiController::class, 'metode_bayar'])->name('metodepembayaran');
+        Route::post('/action/bayar', [App\Http\Controllers\TransaksiController::class, 'bayar'])->name('bayar');
+        Route::get('/{id}/berhasil', [App\Http\Controllers\TransaksiController::class, 'bayar_berhasil'])->name('pembayaranberhasil');
+    });
 });
 
 Route::get('/Jasa/{id}', [App\Http\Controllers\JasaController::class, 'show'])->name('detailjasa');
