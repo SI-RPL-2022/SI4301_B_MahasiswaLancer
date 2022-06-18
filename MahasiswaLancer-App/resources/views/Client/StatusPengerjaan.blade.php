@@ -80,7 +80,8 @@
                                                                     <form method="POST" action="{{ route('batalkan') }}"
                                                                         onsubmit="return confirm('Apakah anda ingin membatalkan ?')">
                                                                         @csrf
-                                                                        {{-- <input type="hidden" name="_method" value="DELETE"> --}}
+                                                                        
+                                                                        <input type="hidden" name="_method" value="DELETE">
                                                                         <input type="hidden" name="id"
                                                                             value="{{ $menunggu_konfirmasi_each->id }}"
                                                                             id="">

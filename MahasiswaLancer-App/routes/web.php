@@ -17,20 +17,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', [App\Http\Controllers\JasaController::class, 'landingpage'])->name('landingpage'); 
+Route::get('/', [App\Http\Controllers\JasaController::class, 'landingpage'])->name('landingpage');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/Jasa/{id}', [App\Http\Controllers\JasaController::class, 'show'])->name('detailjasa');
 
 /*Mahasiswa*/
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::get('/dashboardMHS', function () {
         return view('Mahasiswa.dashboardmhs');
     })->name('dashboardMHS');
-    Route::get('/pesanan', function () {
-        return view('Mahasiswa.pesanan');
-    })->name('pesanan');
+    
 
     Route::prefix('jasa')->group(function () {
         Route::get('/', [App\Http\Controllers\JasaController::class, 'index'])->name('jasa');
@@ -46,8 +42,13 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
         Route::put('/update', [App\Http\Controllers\BiodataMHSController::class, 'update'])->name('updatebiodata');
     });
 
-    Route::get('/statuspekerjaanMHS', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'index'])->name('statusPekerjaan');  
-    
+    Route::get('/statuspekerjaanMHS', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'status'])->name('statusPekerjaan');  
+    Route::post('/action/upload-hasil', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'upload'])->name('uploadhasilkerjaan');
+    Route::get('/pesanan', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'pesanan'])->name('pesanan');
+
+    Route::post('/action/terima-pesanan', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'terima'])->name('terimapesanan');
+    Route::post('/action/tolak-pesanan', [App\Http\Controllers\StatusPekerjaanMHSController::class, 'tolak'])->name('tolakpesanan');
+
 });
 
 /*Client*/
@@ -57,7 +58,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::post('/Jasa/{id}/konfirmasi-pesanan/post', [App\Http\Controllers\TransaksiController::class, 'store'])->name('konfirmasipesananpost');
     Route::get('/pesanan-berhasil/{id}', [App\Http\Controllers\TransaksiController::class, 'viewberhasilpesan'])->name('berhasilpesan');
 
-    Route::post('/action/batalkan', [App\Http\Controllers\TransaksiController::class, 'batalkan'])->name('batalkan');
+    Route::delete('/action/batalkan', [App\Http\Controllers\TransaksiController::class, 'batalkan'])->name('batalkan');
     Route::post('/action/terima', [App\Http\Controllers\TransaksiController::class, 'terima'])->name('terima');
     Route::post('/action/revisi', [App\Http\Controllers\TransaksiController::class, 'revisi'])->name('revisi');
 
@@ -69,7 +70,9 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     });
 });
 
-Route::get('/Jasa/{id}', [App\Http\Controllers\JasaController::class, 'show'])->name('detailjasa');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 Route::get('/tes_view', function(){
     return view('Client.konfirmasiPesanan');

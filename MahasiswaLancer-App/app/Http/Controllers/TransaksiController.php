@@ -8,6 +8,7 @@ use App\Models\file;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class TransaksiController extends Controller
@@ -131,17 +132,7 @@ class TransaksiController extends Controller
         return redirect()->route('berhasilpesan',['id' => $transaksi->jasa_id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaksi $transaksi)
-    {
-        //
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -234,8 +225,9 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::findorfail($request->id);
 
-        $transaksi['status_pesanan'] = 'Ditolak';
-        $transaksi->save();
+        // $transaksi['status_pesanan'] = 'Ditolak';
+        
+        $transaksi->delete();
         return redirect()->back()->with('success', 'User berhasil dihapus.');
     }
 
