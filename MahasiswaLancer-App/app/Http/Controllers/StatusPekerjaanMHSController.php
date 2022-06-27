@@ -59,6 +59,7 @@ class StatusPekerjaanMHSController extends Controller
         
         return redirect()->back();
     }
+    
     public function terima(Request $request)
     {
         $transaksi = Transaksi::findorfail($request->id);
@@ -88,7 +89,8 @@ class StatusPekerjaanMHSController extends Controller
         foreach ($transaksi as $transaksi_each)
         {
             // dd($transaksi_each);
-            if ($transaksi_each->status_pesanan == 'Ditolak' || $transaksi_each->status_pesanan == 'Menunggu Konfirmasi'){
+            // $transaksi_each->status_pesanan == 'Ditolak' || 
+            if ($transaksi_each->status_pesanan == 'Menunggu Konfirmasi'){
                 continue;
             }
 
