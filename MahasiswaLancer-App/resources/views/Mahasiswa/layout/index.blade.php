@@ -28,12 +28,6 @@
 
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboardMHS') }}">
-                                <span class="menu-title">Dashboard</span>
-                                <i class="mdi mdi-home menu-icon"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link collapsed" data-bs-toggle="collapse" href="#jasadetail" aria-expanded="false"
                                 aria-controls="jasadetail">
                                 <span class="menu-title">Jasa</span>
