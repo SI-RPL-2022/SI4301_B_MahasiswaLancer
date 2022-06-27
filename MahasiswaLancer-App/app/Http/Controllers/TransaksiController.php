@@ -24,7 +24,7 @@ class TransaksiController extends Controller
         foreach ($menunggu_konfirmasi as $menunggu_konfirmasi_each)
         {
             $jasa = Jasa::findorfail($menunggu_konfirmasi_each->jasa_id);
-            $menunggu_konfirmasi_each['judul jasa'] = $jasa->judul;
+            $menunggu_konfirmasi_each['judul_jasa'] = $jasa->judul;
             $menunggu_konfirmasi_each['nama_mahasiswa'] = User::findorfail($jasa->userId)->name;
         }
         
@@ -32,7 +32,7 @@ class TransaksiController extends Controller
         foreach ($menunggu_pembayaran as $menunggu_pembayaran_each)
         {
             $jasa = Jasa::findorfail($menunggu_pembayaran_each->jasa_id);
-            $menunggu_pembayaran_each['judul jasa'] = $jasa->judul;
+            $menunggu_pembayaran_each['judul_jasa'] = $jasa->judul;
             $menunggu_pembayaran_each['nama_mahasiswa'] = User::findorfail($jasa->userId)->name;
 
             // $menunggu_pembayaran_each['judul_jasa'] = Jasa::findorfail($menunggu_pembayaran_each->jasa_id)->judul;
@@ -43,7 +43,7 @@ class TransaksiController extends Controller
         foreach ($dalam_pengerjaan as $dalam_pengerjaan_each)
         {
             $jasa = Jasa::findorfail($dalam_pengerjaan_each->jasa_id);
-            $dalam_pengerjaan_each['judul jasa'] = $jasa->judul;
+            $dalam_pengerjaan_each['judul_jasa'] = $jasa->judul;
             $dalam_pengerjaan_each['nama_mahasiswa'] = User::findorfail($jasa->userId)->name;
 
             // $dalam_pengerjaan_each['judul_jasa'] = Jasa::findorfail($dalam_pengerjaan_each->jasa_id)->judul;
@@ -54,7 +54,7 @@ class TransaksiController extends Controller
         foreach ($konfirmasi_hasil as $konfirmasi_hasil_each)
         {
             $jasa = Jasa::findorfail($konfirmasi_hasil_each->jasa_id);
-            $konfirmasi_hasil_each['judul jasa'] = $jasa->judul;
+            $konfirmasi_hasil_each['judul_jasa'] = $jasa->judul;
             $konfirmasi_hasil_each['nama_mahasiswa'] = User::findorfail($jasa->userId)->name;
 
             // $konfirmasi_hasil_each['judul_jasa'] = Jasa::findorfail($konfirmasi_hasil_each->jasa_id)->judul;
@@ -65,7 +65,7 @@ class TransaksiController extends Controller
         foreach ($selesai as $selesai_each)
         {
             $jasa = Jasa::findorfail($selesai_each->jasa_id);
-            $selesai_each['judul jasa'] = $jasa->judul;
+            $selesai_each['judul_jasa'] = $jasa->judul;
             $selesai_each['nama_mahasiswa'] = User::findorfail($jasa->userId)->name;
 
             // $selesai_each['judul_jasa'] = Jasa::findorfail($selesai_each->jasa_id)->judul;
@@ -75,7 +75,7 @@ class TransaksiController extends Controller
         foreach ($ditolak as $ditolak_each)
         {
             $jasa = Jasa::findorfail($ditolak_each->jasa_id);
-            $ditolak_each['judul jasa'] = $jasa->judul;
+            $ditolak_each['judul_jasa'] = $jasa->judul;
             $ditolak_each['nama_mahasiswa'] = User::findorfail($jasa->userId)->name;
 
             // $ditolak_each['judul_jasa'] = Jasa::findorfail($ditolak_each->jasa_id)->judul;
