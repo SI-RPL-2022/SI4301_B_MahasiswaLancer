@@ -120,13 +120,14 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+        $todayDate = date('m/d/Y');
         $validated = $request->validate([
             'id_jasa' => ['required'],
             'judul' => ['required'],
             'email' => ['required'],
             'no_hp' => ['required'],
             'deskripsi' => ['required'],
-            'tanggal' => ['required'],
+            'tanggal' => ['required','after:'.$todayDate],
             'link' => ['required']
         ]);
 
